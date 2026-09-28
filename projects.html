@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browse RERA-approved residential, commercial and plot projects across Gurugram, Noida and Delhi NCR. Filter by location, budget and possession status.">
+  <meta name="theme-color" content="#0E1620">
+  <link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48"><link rel="icon" type="image/png" sizes="512x512" href="favicon-512.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400..700&family=Instrument+Serif:ital@0;1&family=Mrs+Saint+Delafield&family=Stack+Sans+Headline:wght@200..700&display=swap" rel="stylesheet">
+  <title>All Projects | Investors Planet Realty</title>
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header" id="siteHeader">
+    <nav class="navbar-lux" aria-label="Main"><a href="#home" class="logo logo--auto" aria-label="Investors Planet Realty home"><img class="logo__img" src="assets/images/investor-planet-logo.webp" alt="Investors Planet Realty" width="526" height="546"></a>
+      <ul class="navbar-lux__links">
+        <li><a href="index.html" class="navbar-lux__link">Home</a></li>
+        <li><a href="about.html" class="navbar-lux__link">About Us</a></li>
+        <li><a href="projects.html" class="navbar-lux__link is-active">Projects</a></li><li><a href="locations.html" class="navbar-lux__link">Locations</a></li>
+        <li><a href="careers.html" class="navbar-lux__link">Careers</a></li>
+        <li><a href="contact.html" class="navbar-lux__link">Contact</a></li>
+      </ul>
+      <div class="navbar-lux__actions"><a href="tel:+919876543210" class="navbar-lux__phone"><span class="navbar-lux__phone-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"></path></svg></span><span class="navbar-lux__phone-text">+91 98765 43210</span></a><button class="navbar-lux__burger" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu" aria-label="Open menu"><span></span><span></span></button></div>
+    </nav>
+  </header>
+  <div class="offcanvas offcanvas-end mobile-menu" tabindex="-1" id="mobileMenu" aria-label="Menu">
+    <div class="mobile-menu__head"><a href="#home" class="logo logo--light" aria-label="Investors Planet Realty home"><img class="logo__img" src="assets/images/investor-planet-logo.webp" alt="Investors Planet Realty" width="526" height="546"></a><button type="button" class="mobile-menu__close" data-bs-dismiss="offcanvas" aria-label="Close menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6 6 18"></path></svg></button></div>
+    <ul class="mobile-menu__links">
+      <li><a href="index.html" data-bs-dismiss="offcanvas"><span class="mobile-menu__no">01</span>Home</a></li>
+      <li><a href="about.html" data-bs-dismiss="offcanvas"><span class="mobile-menu__no">02</span>About Us</a></li>
+      <li><a href="projects.html" data-bs-dismiss="offcanvas"><span class="mobile-menu__no">03</span>Projects</a></li>
+      <li><a href="locations.html" data-bs-dismiss="offcanvas"><span class="mobile-menu__no">04</span>Locations</a></li>
+      <li><a href="careers.html" data-bs-dismiss="offcanvas"><span class="mobile-menu__no">05</span>Careers</a></li>
+      <li><a href="contact.html" data-bs-dismiss="offcanvas"><span class="mobile-menu__no">06</span>Contact</a></li>
+    </ul>
+    <div class="mobile-menu__foot"><a href="tel:+919876543210">+91 98765 43210</a><a href="mailto:hello@investorsplanetrealty.in">hello@investorsplanetrealty.in</a><a href="#contact" class="btn-lux mt-3" data-bs-dismiss="offcanvas">Book a Site Visit<span class="btn-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></span></a></div>
+  </div>
+  <main>
+    <section class="phero" id="home">
+      <div class="phero__bg"><img src="assets/images/hero1-1521.webp" srcset="assets/images/hero1-900.webp 900w, assets/images/hero1-1521.webp 1521w" alt sizes="100vw" loading="eager" fetchpriority="high" decoding="async" width="1521" height="795"></div>
+      <div class="phero__shade"></div>
+      <div class="container-xl phero__inner">
+        <nav class="phero__crumbs" aria-label="Breadcrumb" data-hero><a href="index.html">Home</a><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"></path></svg><span aria-current="page">Projects</span></nav><span class="eyebrow eyebrow--light" data-hero>Our Portfolio</span>
+        <h1 class="phero__title" data-hero-title><span class="line"><span>Find a project</span></span><span class="line"><span><em>made for you</em></span></span></h1>
+        <p class="phero__text" data-hero>Every listing is verified and RERA-approved. Filter by category, location, budget and status to find your shortlist.</p>
+      </div><a href="#page-start" class="phero__scroll" aria-label="Scroll down" data-hero><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M6 13l6 6 6-6"></path></svg></a>
+    </section><span id="page-start"></span>
+    <section class="listing" id="listing">
+      <div class="container-xl">
+        <!-- Filters -->
+        <form class="listing-filters" id="filters" role="search" onsubmit="event.preventDefault()" style="--chev:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%230e1620' stroke-width='2.4'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E&quot;)">
+          <div class="filters__top">
+            <div class="ftabs" role="tablist" aria-label="Category"><button type="button" role="tab" class="ftabs__btn is-active" data-type="all" aria-selected="true">All<span>18</span></button><button type="button" role="tab" class="ftabs__btn" data-type="residential" aria-selected="false">Residential<span>8</span></button><button type="button" role="tab" class="ftabs__btn" data-type="commercial" aria-selected="false">Commercial<span>6</span></button><button type="button" role="tab" class="ftabs__btn" data-type="plots" aria-selected="false">Plots<span>4</span></button></div><label class="fsearch"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg><input type="search" name="q" placeholder="Search project, developer or sector" aria-label="Search projects" autocomplete="off"></label>
+          </div>
+          <div class="filters__row"><label class="fsel"><span>Location</span><select name="city">
+                <option value="">All locations</option>
+                <option value="Faridabad">Faridabad</option>
+                <option value="Greater Noida">Greater Noida</option>
+                <option value="Gurugram">Gurugram</option>
+                <option value="New Delhi">New Delhi</option>
+                <option value="Noida">Noida</option>
+                <option value="Sohna">Sohna</option>
+              </select></label><label class="fsel"><span>Status</span><select name="status">
+                <option value="">Any status</option>
+                <option value="New Launch">New Launch</option>
+                <option value="Under Construction">Under Construction</option>
+                <option value="Ready to Move">Ready to Move</option>
+              </select></label><label class="fsel"><span>Budget</span><select name="budget">
+                <option value="">Any budget</option>
+                <option value="u1" data-min="0" data-max="100">Under ₹1 Cr</option>
+                <option value="1-2" data-min="100" data-max="200">₹1 – 2 Cr</option>
+                <option value="2-5" data-min="200" data-max="500">₹2 – 5 Cr</option>
+                <option value="5p" data-min="500" data-max="Infinity">₹5 Cr+</option>
+              </select></label><label class="fsel"><span>Sort by</span><select name="sort">
+                <option value="">Recommended</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="name">Name: A to Z</option>
+              </select></label><button type="button" class="freset" id="resetFilters"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"></path><path d="M3 3v5h5"></path></svg>Reset</button></div>
+        </form><!-- Result bar -->
+        <div class="resultbar">
+          <p class="resultbar__count" id="resultCount" aria-live="polite">Showing all 18 projects</p>
+          <div class="chips" id="activeChips"></div>
+        </div><!-- Grid -->
+        <div class="grid" id="projectGrid">
+          <article class="pc" data-name="the crest residences premier developers sector 65, golf course ext. road gurugram" data-type="residential" data-city="Gurugram" data-status="New Launch" data-price="345" data-index="0"><a href="project-details.html" class="pc__media"><img src="assets/images/project-crest-residences-1400.webp" srcset="assets/images/project-crest-residences-420.webp 420w, assets/images/project-crest-residences-768.webp 768w, assets/images/project-crest-residences-1400.webp 1400w" alt="The Crest Residences" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="1400" height="933"><span class="pc__status">New Launch</span><span class="pc__type">residential</span></a>
+            <div class="pc__body"><span class="pc__dev">Premier Developers</span>
+              <h3 class="pc__name"><a href="project-details.html">The Crest Residences</a></h3>
+              <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Sector 65, Golf Course Ext. Road, Gurugram</p>
+              <ul class="pc__meta">
+                <li><small>Configuration</small>3 &amp; 4 BHK</li>
+                <li><small>Size</small>2,150 – 3,800 sq.ft</li>
+                <li><small>Possession</small>Dec 2029</li>
+              </ul>
+              <div class="pc__foot">
+                <div class="pc__price"><small>Starting from</small>₹ 3.45 Cr*</div><a href="project-details.html" class="pc__btn" aria-label="View The Crest Residences"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+              </div>
+            </div>
+          </article>
+          <article class="pc" data-name="skyline business park urban axis sector 113, dwarka expressway gurugram" data-type="commercial" data-city="Gurugram" data-status="Under Construction" data-price="110" data-index="1"><a href="project-details.html" class="pc__media"><img src="assets/images/project-skyline-business-park-1400.webp" srcset="assets/images/project-skyline-business-park-420.webp 420w, assets/images/project-skyline-business-park-800.webp 800w, assets/images/project-skyline-business-park-1400.webp 1400w" alt="Skyline Business Park" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="1400" height="935"><span class="pc__status">Under Construction</span><span class="pc__type">commercial</span></a>
+            <div class="pc__body"><span class="pc__dev">Urban Axis</span>
+              <h3 class="pc__name"><a href="project-details.html">Skyline Business Park</a></h3>
+              <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Sector 113, Dwarka Expressway, Gurugram</p>
+              <ul class="pc__meta">
+                <li><small>Configuration</small>Office &amp; Retail</li>
+                <li><small>Size</small>450 – 5,000 sq.ft</li>
+                <li><small>Possession</small>Mar 2028</li>
+              </ul>
+              <div class="pc__foot">
+                <div class="pc__price"><small>Starting from</small>₹ 1.1 Cr*</div><a href="project-details.html" class="pc__btn" aria-label="View Skyline Business Park"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+              </div>
+            </div>
+          </article>
+          <article class="pc" data-name="verdant estates greenfield group sohna road sohna" data-type="plots" data-city="Sohna" data-status="Ready to Move" data-price="185" data-index="2"><a href="project-details.html" class="pc__media"><img src="assets/images/project-verdant-estates-1400.webp" srcset="assets/images/project-verdant-estates-700.webp 700w, assets/images/project-verdant-estates-1400.webp 1400w" alt="Verdant Estates" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="1400" height="933"><span class="pc__status">Ready to Move</span><span class="pc__type">plots</span></a>
+            <div class="pc__body"><span class="pc__dev">Greenfield Group</span>
+              <h3 class="pc__name"><a href="project-details.html">Verdant Estates</a></h3>
+              <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Sohna Road, Sohna</p>
+              <ul class="pc__meta">
+                <li><small>Configuration</small>Farmhouse Plots</li>
+                <li><small>Size</small>1 – 2 Acres</li>
+                <li><small>Possession</small>Ready</li>
+              </ul>
+              <div class="pc__foot">
+                <div class="pc__price"><small>Starting from</small>₹ 1.85 Cr*</div><a href="project-details.html" class="pc__btn" aria-label="View Verdant Estates"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+              </div>
+            </div>
+          </article>
+          <article class="pc" data-name="aurum towers meridian homes sector 150 noida" data-type="residential" data-city="Noida" data-status="Ready to Move" data-price="195" data-index="3"><a href="project-details.html" class="pc__media"><img src="assets/images/project-aurum-towers-1400.webp" srcset="assets/images/project-aurum-towers-700.webp 700w, assets/images/project-aurum-towers-1400.webp 1400w" alt="Aurum Towers" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="1400" height="1867"><span class="pc__status">Ready to Move</span><span class="pc__type">residential</span></a>
+            <div class="pc__body"><span class="pc__dev">Meridian Homes</span>
+              <h3 class="pc__name"><a href="project-details.html">Aurum Towers</a></h3>
+              <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Sector 150, Noida</p>
+              <ul class="pc__meta">
+                <li><small>Configuration</small>2, 3 &amp; 4 BHK</li>
+                <li><small>Size</small>1,350 – 3,200 sq.ft</li>
+                <li><small>Possession</small>Ready</li>
+              </ul>
+              <div class="pc__foot">
+                <div class="pc__price"><small>Starting from</small>₹ 1.95 Cr*</div><a href="project-details.html" class="pc__btn" aria-label="View Aurum Towers"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+              </div>
+            </div>
+          </article>
+          <article class="pc" data-name="the grand arcade crown realtors spr road gurugram" data-type="commercial" data-city="Gurugram" data-status="New Launch" data-price="85" data-index="4"><a href="project-details.html" class="pc__media"><img src="assets/images/project-grand-arcade-1400.webp" srcset="assets/images/project-grand-arcade-700.webp 700w, assets/images/project-grand-arcade-1400.webp 1400w" alt="The Grand Arcade" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="1400" height="933"><span class="pc__status">New Launch</span><span class="pc__type">commercial</span></a>
+            <div class="pc__body"><span class="pc__dev">Crown Realtors</span>
+              <h3 class="pc__name"><a href="project-details.html">The Grand Arcade</a></h3>
+              <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>SPR Road, Gurugram</p>
+              <ul class="pc__meta">
+                <li><small>Configuration</small>High-Street Retail</li>
+                <li><small>Size</small>300 – 2,400 sq.ft</li>
+                <li><small>Possession</small>Jun 2029</li>
+              </ul>
+              <div class="pc__foot">
+                <div class="pc__price"><small>Starting from</small>₹ 85 L*</div><a href="project-details.html" class="pc__btn" aria-label="View The Grand Arcade"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+              </div>
+            </div>
+          </article>
+          <article class="pc" data-name="palm villas horizon estates sector 36 sohna" data-type="residential" data-city="Sohna" data-status="Under Construction" data-price="650" data-index="5"><a href="project-details.html" class="pc__media"><img src="assets/images/project-palm-villas-1400.webp" srcset="assets/images/project-palm-villas-700.webp 700w, assets/images/project-palm-villas-1400.webp 1400w" alt="Palm Villas" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="1400" height="933"><span class="pc__status">Under Construction</span><span class="pc__type">residential</span></a>
+            <div class="pc__body"><span class="pc__dev">Horizon Estates</span>
+              <h3 class="pc__name"><a href="project-details.html">Palm Villas</a></h3>
+              <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Sector 36, Sohna</p>
+              <ul class="pc__meta">
+                <li><small>Configuration</small>4 BHK Villas</li>
+                <li><small>Size</small>4,200 – 5,600 sq.ft</li>
+                <li><small>Possession</small>Sep 2027</li>
+              </ul>
+              <div class="pc__foot">
+                <div class="pc__price"><small>Starting from</small>₹ 6.5 Cr*</div><a href="project-details.html" class="pc__btn" aria-label="View Palm Villas"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+              </div>
+            </div>
+          </article>
+          <article class="pc" data-name="serene heights skyward realty sector 79 gurugram" data-type="residential" data-city="Gurugram" data-status="Under Construction" data-price="210" data-index="6"><a href="project-details.html" class="pc__media"><img src="assets/images/more-serene-heights-1400.webp" srcset="assets/images/more-serene-heights-640.webp 640w, assets/images/more-serene-heights-1400.webp 1400w" alt="Serene Heights" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="1400" height="933"><span class="pc__status">Under Construction</span><span class="pc__type">residential</span></a>
+            <div class="pc__body"><span class="pc__dev">Skyward Realty</span>
+              <h3 class="pc__name"><a href="project-details.html">Serene Heights</a></h3>
+              <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Sector 79, Gurugram</p>
+              <ul class="pc__meta">
+                <li><small>Configuration</small>3 BHK</li>
+                <li><small>Size</small>1,850 – 2,100 sq.ft</li>
+                <li><small>Possession</small>Dec 2027</li>
+              </ul>
+              <div class="pc__foot">
+                <div class="pc__price"><small>Starting from</small>₹ 2.1 Cr*</div><a href="project-details.html" class="pc__btn" aria-label="View Serene Heights"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+              </div>
+            </div>
+          </article>
+          <article class="pc" data-name="one meridian meridian homes golf course road gurugram" data-type="commercial" data-city="Gurugram" data-status="Ready to Move" data-price="280" data-index="7"><a href="project-details.html" class="pc__media"><img src="assets/images/more-one-meridian-1400.webp" srcset="assets/images/more-one-meridian-420.webp 420w, assets/images/more-one-meridian-768.webp 768w, assets/images/more-one-meridian-1400.webp 1400w" alt="One Meridian" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="1400" height="937"><span class="pc__status">Ready to Move</span><span class="pc__type">commercial</span></a>
+            <div class="pc__body"><span class="pc__dev">Meridian Homes</span>
+              <h3 class="pc__name"><a href="project-details.html">One Meridian</a></h3>
+              <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Golf Course Road, Gurugram</p>
+              <ul class="pc__meta">
+                <li><small>Configuration</small>Office Spaces</li>
+                <li><small>Size</small>1,200 – 8,000 sq.ft</li>
+                <li><small>Possession</small>Ready</li>
+              </ul>
+              <div class="pc__foot">
+                <div class="pc__price"><small>Starting from</small>₹ 2.8 Cr*</div><a href="project-details.html" class="pc__btn" aria-label="View One Meridian"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+              </div>
+            </div>
+          </article>
+          <article class="pc" data-name="casa bella crown realtors sector 108 noida" data-type="residential" data-city="Noida" data-status="New Launch" data-price="390" data-index="8"><a href="project-details.html" class="pc__media"><img src="assets/images/more-casa-bella-1400.webp" srcset="assets/images/more-casa-bella-700.webp 700w, assets/images/more-casa-bella-1400.webp 1400w" alt="Casa Bella" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="1400" height="952"><span class="pc__status">New Launch</span><span class="pc__type">residential</span></a>
+            <div class="pc__body"><span class="pc__dev">Crown Realtors</span>
+              <h3 class="pc__name"><a href="project-details.html">Casa Bella</a></h3>
+              <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Sector 108, Noida</p>
+              <ul class="pc__meta">
+                <li><small>Configuration</small>4 BHK</li>
+                <li><small>Size</small>3,100 – 3,600 sq.ft</li>
+                <li><small>Possession</small>Mar 2030</li>
+              </ul>
+              <div class="pc__foot">
+                <div class="pc__price"><small>Starting from</small>₹ 3.9 Cr*</div><a href="project-details.html" class="pc__btn" aria-label="View Casa Bella"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+              </div>
+            </div>
+          </article>
+          <article class="pc" data-name="the oak enclave greenfield group sector 92, new gurugram gurugram" data-type="plots" data-city="Gurugram" data-status="New Launch" data-price="125" data-index="9"><a href="project-details.html" class="pc__media"><img src="assets/images/more-oak-enclave-1400.webp" srcset="assets/images/more-oak-enclave-700.webp 700w, assets/images/more-oak-enclave-1400.webp 1400w" alt="The Oak Enclave" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="1400" height="933"><span class="pc__status">New Launch</span><span class="pc__type">plots</span></a>
+            <div class="pc__body"><span class="pc__dev">Greenfield Group</span>
+              <h3 class="pc__name"><a href="project-details.html">The Oak Enclave</a></h3>
+              <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Sector 92, New Gurugram, Gurugram</p>
+              <ul class="pc__meta">
+                <li><small>Configuration</small>Residential Plots</li>
+                <li><small>Size</small>150 – 400 sq.yd</li>
+                <li><small>Possession</small>Dec 2028</li>
+              </ul>
+              <div class="pc__foot">
+                <div class="pc__price"><small>Starting from</small>₹ 1.25 Cr*</div><a href="project-details.html" class="pc__btn" aria-label="View The Oak Enclave"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+              </div>
+            </div>
+          </article>
+          <article class="pc" data-name="riviera lofts urban axis sector 106, dwarka expressway gurugram" data-type="residential" data-city="Gurugram" data-status="Under Construction" data-price="160" data-index="10"><a href="project-details.html" class="pc__media"><img src="assets/images/more-riviera-lofts-1400.webp" srcset="assets/images/more-riviera-lofts-700.webp 700w, assets/images/more-riviera-lofts-1400.webp 1400w" alt="Riviera Lofts" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="1400" height="1042"><span class="pc__status">Under Construction</span><span class="pc__type">residential</span></a>
+            <div class="pc__body"><span class="pc__dev">Urban Axis</span>
+              <h3 class="pc__name"><a href="project-details.html">Riviera Lofts</a></h3>
+              <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Sector 106, Dwarka Expressway, Gurugram</p>
+              <ul class="pc__meta">
+                <li><small>Configuration</small>2 &amp; 3 BHK</li>
+                <li><small>Size</small>1,150 – 1,900 sq.ft</li>
+                <li><small>Possession</small>Jun 2028</li>
+              </ul>
+              <div class="pc__foot">
+                <div class="pc__price"><small>Starting from</small>₹ 1.6 Cr*</div><a href="project-details.html" class="pc__btn" aria-label="View Riviera Lofts"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+              </div>
+            </div>
+          </article>
+          <article class="pc" data-name="emerald square skyward realty sector 62 gurugram" data-type="commercial" data-city="Gurugram" data-status="Under Construction" data-price="95" data-index="11"><a href="project-details.html" class="pc__media"><img src="assets/images/more-emerald-square-1400.webp" srcset="assets/images/more-emerald-square-700.webp 700w, assets/images/more-emerald-square-1400.webp 1400w" alt="Emerald Square" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="1400" height="933"><span class="pc__status">Under Construction</span><span class="pc__type">commercial</span></a>
+            <div class="pc__body"><span class="pc__dev">Skyward Realty</span>
+              <h3 class="pc__name"><a href="project-details.html">Emerald Square</a></h3>
+              <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Sector 62, Gurugram</p>
+              <ul class="pc__meta">
+                <li><small>Configuration</small>Retail &amp; SCO</li>
+                <li><small>Size</small>250 – 1,800 sq.ft</li>
+                <li><small>Possession</small>Dec 2027</li>
+              </ul>
+              <div class="pc__foot">
+                <div class="pc__price"><small>Starting from</small>₹ 95 L*</div><a href="project-details.html" class="pc__btn" aria-label="View Emerald Square"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+              </div>
+            </div>
+          </article>
+          <article class="pc" data-name="lakeview greens horizon estates greater noida west greater noida" data-type="residential" data-city="Greater Noida" data-status="Ready to Move" data-price="88" data-index="12"><a href="project-details.html" class="pc__media"><img src="assets/images/offer-residential-1400.webp" srcset="assets/images/offer-residential-420.webp 420w, assets/images/offer-residential-800.webp 800w, assets/images/offer-residential-1400.webp 1400w" alt="Lakeview Greens" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="1400" height="929"><span class="pc__status">Ready to Move</span><span class="pc__type">residential</span></a>
+            <div class="pc__body"><span class="pc__dev">Horizon Estates</span>
+              <h3 class="pc__name"><a href="project-details.html">Lakeview Greens</a></h3>
+              <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Greater Noida West, Greater Noida</p>
+              <ul class="pc__meta">
+                <li><small>Configuration</small>2 &amp; 3 BHK</li>
+                <li><small>Size</small>1,050 – 1,650 sq.ft</li>
+                <li><small>Possession</small>Ready</li>
+              </ul>
+              <div class="pc__foot">
+                <div class="pc__price"><small>Starting from</small>₹ 88 L*</div><a href="project-details.html" class="pc__btn" aria-label="View Lakeview Greens"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+              </div>
+            </div>
+          </article>
+          <article class="pc" data-name="capital trade centre premier developers nehru place new delhi" data-type="commercial" data-city="New Delhi" data-status="Ready to Move" data-price="520" data-index="13"><a href="project-details.html" class="pc__media"><img src="assets/images/offer-commercial-1400.webp" srcset="assets/images/offer-commercial-420.webp 420w, assets/images/offer-commercial-800.webp 800w, assets/images/offer-commercial-1400.webp 1400w" alt="Capital Trade Centre" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="1400" height="933"><span class="pc__status">Ready to Move</span><span class="pc__type">commercial</span></a>
+            <div class="pc__body"><span class="pc__dev">Premier Developers</span>
+              <h3 class="pc__name"><a href="project-details.html">Capital Trade Centre</a></h3>
+              <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Nehru Place, New Delhi</p>
+              <ul class="pc__meta">
+                <li><small>Configuration</small>Office Spaces</li>
+                <li><small>Size</small>900 – 6,000 sq.ft</li>
+                <li><small>Possession</small>Ready</li>
+              </ul>
+              <div class="pc__foot">
+                <div class="pc__price"><small>Starting from</small>₹ 5.2 Cr*</div><a href="project-details.html" class="pc__btn" aria-label="View Capital Trade Centre"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+              </div>
+            </div>
+          </article>
+          <article class="pc" data-name="aravali farms greenfield group surajkund road faridabad" data-type="plots" data-city="Faridabad" data-status="Ready to Move" data-price="240" data-index="14"><a href="project-details.html" class="pc__media"><img src="assets/images/offer-plots-1400.webp" srcset="assets/images/offer-plots-420.webp 420w, assets/images/offer-plots-800.webp 800w, assets/images/offer-plots-1400.webp 1400w" alt="Aravali Farms" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="1400" height="788"><span class="pc__status">Ready to Move</span><span class="pc__type">plots</span></a>
+            <div class="pc__body"><span class="pc__dev">Greenfield Group</span>
+              <h3 class="pc__name"><a href="project-details.html">Aravali Farms</a></h3>
+              <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Surajkund Road, Faridabad</p>
+              <ul class="pc__meta">
+                <li><small>Configuration</small>Farmhouse Plots</li>
+                <li><small>Size</small>1 – 2.5 Acres</li>
+                <li><small>Possession</small>Ready</li>
+              </ul>
+              <div class="pc__foot">
+                <div class="pc__price"><small>Starting from</small>₹ 2.4 Cr*</div><a href="project-details.html" class="pc__btn" aria-label="View Aravali Farms"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+              </div>
+            </div>
+          </article>
+          <article class="pc" data-name="horizon sky suites horizon estates sector 128, noida expressway noida" data-type="residential" data-city="Noida" data-status="New Launch" data-price="420" data-index="15"><a href="project-details.html" class="pc__media"><img src="assets/images/skyline-dusk-2000.webp" srcset="assets/images/skyline-dusk-420.webp 420w, assets/images/skyline-dusk-900.webp 900w" alt="Horizon Sky Suites" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="5968" height="3979"><span class="pc__status">New Launch</span><span class="pc__type">residential</span></a>
+            <div class="pc__body"><span class="pc__dev">Horizon Estates</span>
+              <h3 class="pc__name"><a href="project-details.html">Horizon Sky Suites</a></h3>
+              <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Sector 128, Noida Expressway, Noida</p>
+              <ul class="pc__meta">
+                <li><small>Configuration</small>3 &amp; 4 BHK</li>
+                <li><small>Size</small>2,400 – 4,100 sq.ft</li>
+                <li><small>Possession</small>Dec 2030</li>
+              </ul>
+              <div class="pc__foot">
+                <div class="pc__price"><small>Starting from</small>₹ 4.2 Cr*</div><a href="project-details.html" class="pc__btn" aria-label="View Horizon Sky Suites"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+              </div>
+            </div>
+          </article>
+          <article class="pc" data-name="metro link plaza urban axis sector 18 noida" data-type="commercial" data-city="Noida" data-status="New Launch" data-price="65" data-index="16"><a href="project-details.html" class="pc__media"><img src="assets/images/hero2-1521.webp" srcset="assets/images/hero2-420.webp 420w, assets/images/hero2-900.webp 900w" alt="Metro Link Plaza" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="1521" height="795"><span class="pc__status">New Launch</span><span class="pc__type">commercial</span></a>
+            <div class="pc__body"><span class="pc__dev">Urban Axis</span>
+              <h3 class="pc__name"><a href="project-details.html">Metro Link Plaza</a></h3>
+              <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Sector 18, Noida</p>
+              <ul class="pc__meta">
+                <li><small>Configuration</small>Retail Shops</li>
+                <li><small>Size</small>200 – 1,200 sq.ft</li>
+                <li><small>Possession</small>Mar 2029</li>
+              </ul>
+              <div class="pc__foot">
+                <div class="pc__price"><small>Starting from</small>₹ 65 L*</div><a href="project-details.html" class="pc__btn" aria-label="View Metro Link Plaza"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+              </div>
+            </div>
+          </article>
+          <article class="pc" data-name="sunrise township skyward realty sector 88 faridabad" data-type="plots" data-city="Faridabad" data-status="Under Construction" data-price="72" data-index="17"><a href="project-details.html" class="pc__media"><img src="assets/images/hero1-1521.webp" srcset="assets/images/hero1-420.webp 420w, assets/images/hero1-900.webp 900w" alt="Sunrise Township" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="1521" height="795"><span class="pc__status">Under Construction</span><span class="pc__type">plots</span></a>
+            <div class="pc__body"><span class="pc__dev">Skyward Realty</span>
+              <h3 class="pc__name"><a href="project-details.html">Sunrise Township</a></h3>
+              <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Sector 88, Faridabad</p>
+              <ul class="pc__meta">
+                <li><small>Configuration</small>Residential Plots</li>
+                <li><small>Size</small>120 – 300 sq.yd</li>
+                <li><small>Possession</small>Sep 2027</li>
+              </ul>
+              <div class="pc__foot">
+                <div class="pc__price"><small>Starting from</small>₹ 72 L*</div><a href="project-details.html" class="pc__btn" aria-label="View Sunrise Township"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+              </div>
+            </div>
+          </article>
+        </div><!-- Empty state -->
+        <div class="empty" id="emptyState" hidden><span class="empty__icon" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V21H3z"></path><path d="M9.5 14.5h5"></path></svg></span>
+          <h3>No projects match these filters</h3>
+          <p>Try widening your budget or location, or tell us what you need and we will shortlist options for you.</p>
+          <div class="empty__actions"><button type="button" class="btn-lux btn-lux--ghost" data-reset>Clear filters</button><a href="index.html#contact" class="btn-lux">Talk to an advisor<span class="btn-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></span></a></div>
+        </div><!-- Pagination -->
+        <nav class="pager" id="pager" aria-label="Project pages"></nav>
+      </div>
+    </section>
+  </main>
+  <section class="cta" id="contact">
+    <div class="container-xl">
+      <div class="cta__box" data-reveal><img src="assets/images/skyline-dusk-2000.webp" srcset="assets/images/skyline-dusk-900.webp 900w, assets/images/skyline-dusk-2000.webp 2000w" alt sizes="100vw" loading="lazy" decoding="async" width="2000" height="1333" class="cta__bg">
+        <div class="cta__shade"></div>
+        <div class="row g-4 align-items-center position-relative">
+          <div class="col-lg-6"><span class="eyebrow eyebrow--light">Book a Site Visit</span>
+            <h2 class="section-title text-white">Let’s find your <em class="text-gold">next address</em></h2>
+            <p class="cta__lead">Share a few details and a senior advisor will call you back within the hour.</p>
+          </div>
+          <div class="col-lg-6">
+            <form class="cta__form" onsubmit="event.preventDefault(); this.querySelector('button').textContent = 'Thank you! We will call you shortly';"><input type="text" name="name" placeholder="Full name" required aria-label="Full name"><input type="tel" name="phone" placeholder="Phone number" required aria-label="Phone number" pattern="[0-9+ ]{10,14}"><select name="interest" aria-label="Interested in">
+                <option>Residential</option>
+                <option>Commercial</option>
+                <option>Plots</option>
+              </select><button type="submit" class="cta__submit">Request a Call Back</button></form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="container-xl">
+      <div class="row g-5 footer__top">
+        <div class="col-lg-4"><a href="#home" class="logo logo--light" aria-label="Investors Planet Realty home"><img class="logo__img" src="assets/images/investor-planet-logo.webp" alt="Investors Planet Realty" width="526" height="546"></a>
+          <p class="footer__about">A premier real estate consultancy helping families and investors discover exceptional homes and high-yield commercial spaces across Delhi NCR.</p>
+          <div class="footer__social"><a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg></a><a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h-2.5A4.5 4.5 0 0 0 8 7.5V10H5v4h3v7h4v-7h3l1-4h-4V7.5a.5.5 0 0 1 .5-.5H15z"/></svg></a><a href="#" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 11v6M8 7.5v.01M12 17v-6M16 17v-3.5a2.5 2.5 0 0 0-4-2"/></svg></a><a href="#" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="4"/><path d="m10 9 5 3-5 3z" fill="currentColor"/></svg></a></div>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h4 class="footer__title">Explore</h4>
+          <ul class="footer__links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="locations.html">Locations</a></li>
+            <li><a href="careers.html">Careers</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h4 class="footer__title">Properties</h4>
+          <ul class="footer__links">
+            <li><a href="residential.html">Residential</a></li>
+            <li><a href="commercial.html">Commercial</a></li>
+            <li><a href="plots.html">Plots</a></li>
+            <li><a href="projects.html?status=New+Launch">New Launches</a></li>
+            <li><a href="projects.html?status=Ready+to+Move">Ready to Move</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4">
+          <h4 class="footer__title">Get in Touch</h4>
+          <ul class="footer__contact">
+            <li><small>Call us</small><a href="tel:+919876543210">+91 98765 43210</a></li>
+            <li><small>Email</small><a href="mailto:hello@investorsplanetrealty.in">hello@investorsplanetrealty.in</a></li>
+            <li><small>Visit</small><span>Level 12, One Horizon Centre, Golf Course Road, Sector 43, Gurugram 122002</span></li>
+          </ul>
+          <form class="footer__news" onsubmit="event.preventDefault(); this.reset();"><input type="email" placeholder="Email for new launch alerts" aria-label="Email address" required><button type="submit" aria-label="Subscribe"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button></form>
+        </div>
+      </div>
+      <div class="footer__word font-head" aria-hidden="true">Investors Planet</div>
+      <div class="footer__bottom"><span>© 2026 Investors Planet Realty. All rights reserved.</span><span>RERA No. UPRERAAGT000235/11/2025</span><span class="footer__legal"><a href="#">Privacy Policy</a><a href="#">Terms</a><a href="#">Disclaimer</a></span></div>
+    </div>
+  </footer>
+  <a href="https://wa.me/919876543210" class="float-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zm8.4-18.2A11.8 11.8 0 0 0 1.7 17.8L0 24l6.3-1.7A11.8 11.8 0 0 0 24 12c0-3.2-1.2-6.1-3.6-8.4z"></path></svg></a>
+  <!-- Libraries -->
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+  <!-- Site scripts -->
+  <script defer src="js/main.js"></script>
+</body>
+</html>
