@@ -592,13 +592,16 @@ img { max-width: 100%; display: block; }
   place-items: center;
 }
 .footer__word {
-  font-size: clamp(30px, 9.5vw, 140px);
-  line-height: 0.8;
-  text-transform: uppercase;
+  font-size: clamp(16px, 6.2vw, 96px); /* sized so the full name fits on one line */
+  white-space: nowrap;
+  /* lowercase has descenders, so the box needs room below the baseline and the
+     fade has to run past them, or the tails of "p" and "y" vanish */
+  line-height: 1.2;
+  text-transform: lowercase;
   text-align: center;
   letter-spacing: -0.02em;
-  margin-top: clamp(48px, 7vw, 96px);
-  background: linear-gradient(180deg, rgba(201, 163, 106, 0.35), rgba(201, 163, 106, 0));
+  margin-top: clamp(40px, 6vw, 80px);
+  background: linear-gradient(180deg, rgba(201, 163, 106, 0.38) 10%, rgba(201, 163, 106, 0.06) 92%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -1640,7 +1643,8 @@ img { max-width: 100%; display: block; }
 .manifesto { max-width: 1120px; margin: 0 auto clamp(64px, 8vw, 110px); text-align: center; }
 .manifesto .eyebrow { justify-content: center; }
 .manifesto__text {
-  font-size: clamp(26px, 3.6vw, 52px);
+  /* sized for the current copy: any bigger and it runs to six lines */
+  font-size: clamp(19px, 2.8vw, 40px);
   line-height: 1.32;
   letter-spacing: -0.025em;
   color: var(--ink);
@@ -2114,7 +2118,7 @@ img { max-width: 100%; display: block; }
 
 /* offices */
 .offices { background: #fff; }
-.offices__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.offices__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 420px)); justify-content: center; gap: 20px; }
 .office { display: flex; flex-direction: column; padding: 28px; border-radius: 24px; border: 1px solid var(--line); background: #fff; transition: box-shadow 0.4s, transform 0.4s var(--ease), border-color 0.3s; }
 .office:hover { transform: translateY(-5px); box-shadow: var(--shadow-soft); border-color: transparent; }
 .office__top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
@@ -3124,8 +3128,6 @@ img { max-width: 100%; display: block; }
 
 /* ==========================================================================
    Locations → Developers → Projects
-   Tighter corners than the rest of the site on purpose: a crisp edge reads as
-   more considered than a soft one at this size.
    ========================================================================== */
 
 .loc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
@@ -3137,7 +3139,7 @@ img { max-width: 100%; display: block; }
   align-items: flex-end;
   min-height: 420px;
   padding: 32px 30px 28px;
-  border-radius: 6px;
+  border-radius: 20px;
   overflow: hidden;
   isolation: isolate;
   color: #fff;
@@ -3230,7 +3232,7 @@ img { max-width: 100%; display: block; }
   display: flex;
   gap: 18px;
   padding: 26px 58px 26px 26px;
-  border-radius: 6px;
+  border-radius: 20px;
   border: 1px solid var(--line);
   background: #fff;
   color: var(--ink);
@@ -3241,7 +3243,7 @@ img { max-width: 100%; display: block; }
   flex-shrink: 0;
   width: 50px;
   height: 50px;
-  border-radius: 4px;
+  border-radius: 11px;
   display: grid;
   place-items: center;
   background: var(--ink);
@@ -3257,7 +3259,7 @@ img { max-width: 100%; display: block; }
   font-size: 11.5px;
   font-weight: 500;
   padding: 4px 10px;
-  border-radius: 3px;
+  border-radius: 8px;
   background: var(--ivory);
   color: var(--muted);
 }
@@ -3267,7 +3269,7 @@ img { max-width: 100%; display: block; }
   top: 26px;
   width: 34px;
   height: 34px;
-  border-radius: 4px;
+  border-radius: 11px;
   display: grid;
   place-items: center;
   border: 1px solid var(--line);
@@ -3281,7 +3283,7 @@ img { max-width: 100%; display: block; }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 20px;
   overflow: hidden;
 }
 .dev-facts div { padding: 26px 30px; }
@@ -3300,4 +3302,170 @@ img { max-width: 100%; display: block; }
   .dev-facts { grid-template-columns: 1fr; }
   .dev-facts div + div { border-left: 0; border-top: 1px solid var(--line); }
   .dev-facts dd { font-size: 28px; }
+}
+
+/* ==========================================================================
+   Navbar dropdown (Projects)
+   Opens on hover and on keyboard focus. The panel sits directly under the bar
+   with no gap to cross, so the pointer never falls out of it on the way down.
+   ========================================================================== */
+.navbar-lux__has-menu { position: relative; display: flex; }
+.navbar-lux__caret { margin-left: 7px; opacity: 0.5; transition: transform 0.4s var(--ease), opacity 0.3s; }
+.navbar-lux__has-menu:hover .navbar-lux__caret,
+.navbar-lux__has-menu:focus-within .navbar-lux__caret { transform: rotate(180deg); opacity: 1; }
+
+.navbar-lux__menu {
+  position: absolute;
+  top: 100%;
+  left: 6px;
+  min-width: 248px;
+  padding-top: 12px; /* keeps hover contiguous with the bar */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease), visibility 0.35s;
+}
+.navbar-lux__has-menu:hover .navbar-lux__menu,
+.navbar-lux__has-menu:focus-within .navbar-lux__menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.navbar-lux__panel {
+  display: grid;
+  padding: 8px;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background: #fff;
+  box-shadow: 0 26px 52px -30px rgba(14, 22, 32, 0.5);
+}
+.navbar-lux__panel a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 11px 14px;
+  border-radius: 11px;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--ink);
+  transition: background 0.3s, color 0.3s;
+}
+.navbar-lux__panel a:hover { background: var(--ivory); color: var(--gold-deep); }
+.navbar-lux__panel a span {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+.navbar-lux__panel a:hover span { color: var(--gold-deep); }
+
+/* Mobile menu: the same four links, nested under Projects */
+.mobile-menu { overflow-y: auto; }
+.mobile-menu__sub {
+  list-style: none;
+  margin: 0 0 6px;
+  padding: 6px 0 0 42px;
+  display: grid;
+  gap: 2px;
+}
+.mobile-menu__links .mobile-menu__sub a {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  padding: 9px 0;
+  border-bottom: 0;
+  color: rgba(255, 255, 255, 0.62);
+}
+.mobile-menu__links .mobile-menu__sub a:hover { color: var(--gold); padding-left: 6px; }
+
+/* ==========================================================================
+   About: body copy sections (What we do)
+   ========================================================================== */
+.about-copy__body p {
+  font-size: 16.5px;
+  line-height: 1.8;
+  color: var(--muted);
+  margin: 0 0 20px;
+}
+.about-copy__body p:first-child { color: var(--text); }
+.about-copy__body p:last-child { margin-bottom: 0; }
+@media (max-width: 991.98px) {
+  .about-copy__body p { font-size: 15.5px; line-height: 1.75; }
+}
+
+/* ==========================================================================
+   About: Our Team
+   Heading held on the left, the team as divider-separated rows on the right.
+   ========================================================================== */
+.team { background: #fff; }
+.team__layout {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(32px, 6vw, 90px);
+  align-items: start;
+}
+.team__intro { position: sticky; top: 120px; }
+.team__cta { display: inline-flex; margin-top: 26px; }
+
+.team__list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+
+.tmember {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  align-items: center;
+  gap: 22px;
+  padding: 22px 8px;
+  border-bottom: 1px solid var(--line);
+  transition: padding-left 0.5s var(--ease), background 0.4s;
+}
+.tmember:hover { padding-left: 18px; background: var(--ivory); }
+
+.tmember__photo {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--sand);
+  box-shadow: 0 0 0 1px var(--line);
+  transition: box-shadow 0.45s var(--ease);
+}
+.tmember:hover .tmember__photo { box-shadow: 0 0 0 1px rgba(201, 163, 106, 0.7), 0 0 0 4px rgba(201, 163, 106, 0.14); }
+.tmember__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 22%;
+  transition: transform 1s var(--ease);
+}
+.tmember:hover .tmember__photo img { transform: scale(1.07); }
+
+.tmember__name {
+  font-size: clamp(18px, 1.5vw, 21px);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.tmember__role {
+  justify-self: end;
+  text-align: right;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.4s;
+}
+.tmember:hover .tmember__role { color: var(--gold-deep); }
+
+@media (max-width: 991.98px) {
+  .team__layout { grid-template-columns: 1fr; gap: 36px; }
+  .team__intro { position: static; }
+}
+@media (max-width: 575.98px) {
+  .tmember { grid-template-columns: 52px 1fr; gap: 16px; padding: 18px 4px; }
+  .tmember__photo { width: 52px; height: 52px; }
+  .tmember__role { grid-column: 2; justify-self: start; text-align: left; margin-top: 4px; }
+  .tmember:hover { padding-left: 10px; }
 }
