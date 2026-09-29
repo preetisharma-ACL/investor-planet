@@ -9,9 +9,9 @@
      3.  Home: hero search tabs
      4.  Home: offering panels
      5.  Home: featured projects filter
-     6.  Home: developer logo wall
-     7.  About: story gates + manifesto
-     8.  About: FAQ accordion
+     7.  Home: developer logo wall
+     8.  About: story gates + manifesto
+     7.  About: FAQ accordion
      9. Offerings: skyline, gates, city filter
      10. Projects listing: filters, sorting, pagination
      11. Careers: job filter + application form
@@ -870,4 +870,30 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
     e.preventDefault();
     go(current + step, true);
   });
+})();
+
+/* ---------- Blogs: category filter ---------- */
+(function () {
+  const filters = Array.from(document.querySelectorAll('.bloglist__filter'));
+  const items = Array.from(document.querySelectorAll('.blog-item'));
+  const empty = document.querySelector('.bloglist__empty');
+  if (!filters.length || !items.length) return;
+
+  filters.forEach((btn) =>
+    btn.addEventListener('click', () => {
+      const cat = btn.dataset.cat;
+      filters.forEach((f) => {
+        const on = f === btn;
+        f.classList.toggle('is-active', on);
+        f.setAttribute('aria-selected', String(on));
+      });
+      let shown = 0;
+      items.forEach((li) => {
+        const match = cat === 'all' || li.dataset.cat === cat;
+        li.hidden = !match;
+        if (match) shown++;
+      });
+      if (empty) empty.hidden = shown > 0;
+    }),
+  );
 })();
