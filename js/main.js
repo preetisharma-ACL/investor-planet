@@ -359,12 +359,6 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
   }
 
   // Gates: start closed in the middle, slide apart to the sides as the section scrolls in.
-  if (document.querySelector('.wgate') && !reduceMotion) {
-    const open = () => (window.innerWidth < 768 ? 62 : 46); // % of each door's width
-    gsap.timeline({ scrollTrigger: { trigger: '.why-cat', start: 'top 95%', end: 'top 5%', scrub: 0.8, invalidateOnRefresh: true } })
-      .fromTo('.wgate__door--l', { xPercent: 0 }, { xPercent: () => -open(), ease: 'power2.inOut' }, 0)
-      .fromTo('.wgate__door--r', { xPercent: 0 }, { xPercent: () => open(), ease: 'power2.inOut' }, 0);
-  }
 
   // City filter for the project grid.
   const btns = [...document.querySelectorAll('.cities__btn')];
