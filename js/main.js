@@ -10,17 +10,16 @@
      4.  Home: offering panels
      5.  Home: featured projects filter
      6.  Home: developer logo wall
-     7.  Home: more projects slider (Swiper)
-     8.  About: story gates + manifesto
-     9.  About: FAQ accordion
-     10. Offerings: skyline, gates, city filter
-     11. Projects listing: filters, sorting, pagination
-     12. Careers: job filter + application form
-     13. Enquiry form (contact, project sidebar, project popup)
-     14. Project: section tabs, floor plans, lightbox, enquiry popup
+     7.  About: story gates + manifesto
+     8.  About: FAQ accordion
+     9. Offerings: skyline, gates, city filter
+     10. Projects listing: filters, sorting, pagination
+     11. Careers: job filter + application form
+     12. Enquiry form (contact, project sidebar, project popup)
+     13. Project: section tabs, floor plans, lightbox, enquiry popup
 
    Libraries expected on the page: GSAP + ScrollTrigger, Lenis, Bootstrap
-   (offcanvas menu) and, on the home page only, Swiper.
+   (offcanvas menu).
    ========================================================================== */
 
 /* ==========================================================================
@@ -224,8 +223,12 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
 
   const pool = JSON.parse(poolEl.textContent || '[]');
   const cells = [...wall.querySelectorAll('.logo-cell')];
-  const shown = new Set(cells.map((c) => c.querySelector('img').getAttribute('src')));
+  // a cell may hold a name placeholder instead of a logo
+  const shown = new Set(cells.map((c) => c.querySelector('img')).filter(Boolean).map((i) => i.getAttribute('src')));
+  // With a short roster every logo is already on the wall, so there is nothing to
+  // hold back as a spare. Seed the queue from the whole pool and let logos recur.
   const spares = pool.filter((p) => !shown.has(p.src));
+  if (!spares.length) spares.push(...pool);
 
   // Preload spares so the dissolve never shows a half-loaded image.
   spares.forEach((s) => { const i = new Image(); i.src = s.src; });
@@ -242,7 +245,8 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
     let cell;
     for (let tries = 0; tries < cells.length && !cell; tries++) {
       const c = nextCell();
-      if (c.offsetParent !== null && !c.classList.contains('is-swapping') && !c.matches(':hover')) cell = c;
+      // a cell holding a name placeholder rather than a logo has nothing to dissolve
+      if (c.offsetParent !== null && c.querySelector('.logo-cell__img') && !c.classList.contains('is-swapping') && !c.matches(':hover')) cell = c;
     }
     if (!cell || !spares.length) return;
 
@@ -251,7 +255,9 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
     imgs.forEach((img, i) => { if (i < imgs.length - 1) img.remove(); });
     const oldImg = imgs[imgs.length - 1];
 
-    const incoming = spares.shift();
+    let incoming = spares.shift();
+    // never dissolve a logo into the cell that already shows it
+    if (incoming.src === oldImg.getAttribute('src') && spares.length) { spares.push(incoming); incoming = spares.shift(); }
     const outgoing = { name: oldImg.alt, src: oldImg.getAttribute('src'), scale: Number(oldImg.style.getPropertyValue('--s')) || 1 };
 
     const newImg = oldImg.cloneNode();
@@ -294,38 +300,7 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
 })();
 
 /* ==========================================================================
-   7. Home: "more projects" slider (Swiper)
-   ========================================================================== */
-(function () {
-  const root = document.querySelector('.more__slider');
-  if (!root || typeof Swiper === 'undefined') return;
-  const prev = document.querySelector('.more__arrow--prev');
-  const next = document.querySelector('.more__arrow--next');
-
-  const update = (s) => {
-    if (prev) prev.disabled = s.isBeginning;
-    if (next) next.disabled = s.isEnd;
-  };
-
-  // swiper-bundle already includes the Keyboard, Mousewheel and A11y modules.
-  const slider = new Swiper(root, {
-    slidesPerView: 'auto',
-    spaceBetween: 24,
-    speed: 900,
-    grabCursor: true,
-    watchOverflow: true,
-    keyboard: { enabled: true, onlyInViewport: true },
-    mousewheel: { forceToAxis: true },
-    breakpoints: { 0: { spaceBetween: 16 }, 768: { spaceBetween: 24 } },
-    on: { init: update, slideChange: update, progress: update, resize: update },
-  });
-
-  if (prev) prev.addEventListener('click', () => slider.slidePrev());
-  if (next) next.addEventListener('click', () => slider.slideNext());
-})();
-
-/* ==========================================================================
-   8. About: story gates and the manifesto
+   7. About: story gates and the manifesto
    ========================================================================== */
 (function () {
   // Gates: start closed in the middle, slide apart to the sides as the section scrolls in.
@@ -352,7 +327,7 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
 })();
 
 /* ==========================================================================
-   9. About: FAQ accordion — one open at a time
+   8. About: FAQ accordion — one open at a time
    ========================================================================== */
 (function () {
   const items = document.querySelectorAll('.acc__item');
@@ -372,7 +347,7 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
 })();
 
 /* ==========================================================================
-   10. Offering pages: rising skyline, gates, city filter
+   9. Offering pages: rising skyline, gates, city filter
    ========================================================================== */
 (function () {
   // "How it works" buildings rise into place as the section scrolls in.
@@ -415,7 +390,7 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
 })();
 
 /* ==========================================================================
-   11. Projects listing: type tabs, search, filters, sorting, pagination
+   10. Projects listing: type tabs, search, filters, sorting, pagination
    State lives in the URL (?type=&city=&status=&budget=&sort=&page=).
    ========================================================================== */
 (function () {
@@ -607,7 +582,7 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
 })();
 
 /* ==========================================================================
-   12. Careers: department filter and the application form
+   11. Careers: department filter and the application form
    ========================================================================== */
 (function () {
   // Department filter
@@ -669,7 +644,7 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
 })();
 
 /* ==========================================================================
-   13. Enquiry form — contact page, project sidebar and project popup
+   12. Enquiry form — contact page, project sidebar and project popup
    ========================================================================== */
 (function () {
   // Placeholder for your lead endpoint (CRM, email service, Google Sheet…).
@@ -726,7 +701,7 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
 })();
 
 /* ==========================================================================
-   14. Project pages: sticky section tabs, floor-plan tabs, gallery lightbox
+   13. Project pages: sticky section tabs, floor-plan tabs, gallery lightbox
        and the enquiry popup
    ========================================================================== */
 
@@ -845,10 +820,60 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
   // Auto-popup 3 seconds after a project page opens (skipped once the visitor has enquired this session).
   const AUTO_POPUP_DELAY = 3000;
   const enquired = () => { try { return sessionStorage.getItem('enquired'); } catch (err) { return null; } };
-  window.setTimeout(() => {
+  const autoOpen = () => {
     const lb = document.getElementById('lightbox');
     const typing = document.activeElement && document.activeElement.closest('form');
     if (enquired() || (lb && lb.open) || typing || document.hidden) return;
+    // A modal <dialog> makes the page behind it inert, so popping up over an open
+    // mobile menu would swallow its taps. Wait until the drawer is closed.
+    if (document.querySelector('.offcanvas.show')) {
+      document.addEventListener('hidden.bs.offcanvas', () => window.setTimeout(autoOpen, 500), { once: true });
+      return;
+    }
     open('Get exclusive launch offers');
-  }, AUTO_POPUP_DELAY);
+  };
+  window.setTimeout(autoOpen, AUTO_POPUP_DELAY);
+})();
+
+/* ---------- Home testimonials ---------- */
+// Click an avatar in the constellation (or use the arrows / arrow keys) to swap the review.
+// The panels are all in the DOM and cross-fade via CSS, so nothing here touches transforms.
+(function () {
+  const root = document.querySelector('[data-testimonials]');
+  if (!root) return;
+  const items = Array.from(root.querySelectorAll('.tst__item'));
+  const tabs = Array.from(root.querySelectorAll('.tavatar'));
+  const counter = root.querySelector('[data-tst-index]');
+  if (items.length < 2 || tabs.length !== items.length) return;
+
+  let current = 0;
+
+  const go = (n, focus) => {
+    const to = (n + items.length) % items.length;
+    current = to;
+    items.forEach((el, i) => el.classList.toggle('is-active', i === to));
+    tabs.forEach((el, i) => {
+      const on = i === to;
+      el.classList.toggle('is-active', on);
+      el.setAttribute('aria-selected', on ? 'true' : 'false');
+      el.tabIndex = on ? 0 : -1;
+    });
+    if (counter) counter.textContent = String(to + 1).padStart(2, '0');
+    if (focus) tabs[to].focus();
+  };
+
+  tabs.forEach((tab, i) => tab.addEventListener('click', () => go(i)));
+
+  const prev = root.querySelector('.tst__arrow--prev');
+  const next = root.querySelector('.tst__arrow--next');
+  if (prev) prev.addEventListener('click', () => go(current - 1));
+  if (next) next.addEventListener('click', () => go(current + 1));
+
+  // Left/right arrows move through the avatars while one of them holds focus.
+  root.querySelector('.tst__cloud').addEventListener('keydown', (e) => {
+    const step = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+    if (!step) return;
+    e.preventDefault();
+    go(current + step, true);
+  });
 })();
