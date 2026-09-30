@@ -177,7 +177,7 @@
             <p class="cta__lead">Tell us what you are looking for and one of our advisors will get back to you.</p>
           </div>
           <div class="col-lg-6">
-            <form class="cta__form" onsubmit="event.preventDefault(); this.querySelector('button').textContent = 'Thank you! We will call you shortly';"><input type="text" name="name" placeholder="Full name" required aria-label="Full name"><input type="tel" name="phone" placeholder="Phone number" required aria-label="Phone number" pattern="[0-9+ ]{10,14}"><select name="interest" aria-label="Interested in">
+            <form class="cta__form" onsubmit="event.preventDefault(); this.querySelector('button').textContent = 'Thank you! We will call you shortly';"><input type="text" name="name" placeholder="Full name" required aria-label="Full name"><input type="tel" name="phone" placeholder="Phone number" required aria-label="Phone number" pattern="[0-9+ ]{10,14}"><input type="text" name="city" list="cta-cities" placeholder="City" aria-label="City" autocomplete="address-level2"><datalist id="cta-cities"><option value="Noida"></option><option value="Greater Noida"></option><option value="Ghaziabad"></option><option value="Delhi"></option><option value="Gurugram"></option></datalist><select name="interest" aria-label="Interested in">
                 <option>Residential</option>
                 <option>Commercial</option>
                 <option>Plots</option>

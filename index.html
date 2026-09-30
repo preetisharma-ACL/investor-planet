@@ -210,7 +210,6 @@
             <div class="why__media" data-reveal>
               <div class="why__img"><img src="assets/images/hero3-1521.webp" srcset="assets/images/hero3-900.webp 900w, assets/images/hero3-1521.webp 1521w" alt="Illuminated residential towers at night" sizes="(max-width: 991px) 100vw, 50vw" data-parallax="true" loading="lazy" decoding="async" width="1300" height="679"></div>
               <div class="why__badge"><span class="why__badge-num font-head">14<sup>+</sup></span><span class="why__badge-text">Years shaping<br>Delhi NCR skylines</span></div>
-              <div class="why__ring" aria-hidden="true"><svg viewBox="0 0 120 120"><defs><path id="circlePath" d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0"></path></defs><text><textPath href="#circlePath">TRUST · TRANSPARENCY · EXPERTISE · </textPath></text></svg><span>★</span></div>
             </div>
           </div>
           <div class="col-lg-6">
@@ -454,7 +453,7 @@
             <p class="cta__lead">Tell us what you are looking for and one of our advisors will get back to you.</p>
           </div>
           <div class="col-lg-6">
-            <form class="cta__form" onsubmit="event.preventDefault(); this.querySelector('button').textContent = 'Thank you! We will call you shortly';"><input type="text" name="name" placeholder="Full name" required aria-label="Full name"><input type="tel" name="phone" placeholder="Phone number" required aria-label="Phone number" pattern="[0-9+ ]{10,14}"><select name="interest" aria-label="Interested in">
+            <form class="cta__form" onsubmit="event.preventDefault(); this.querySelector('button').textContent = 'Thank you! We will call you shortly';"><input type="text" name="name" placeholder="Full name" required aria-label="Full name"><input type="tel" name="phone" placeholder="Phone number" required aria-label="Phone number" pattern="[0-9+ ]{10,14}"><input type="text" name="city" list="cta-cities" placeholder="City" aria-label="City" autocomplete="address-level2"><datalist id="cta-cities"><option value="Noida"></option><option value="Greater Noida"></option><option value="Ghaziabad"></option><option value="Delhi"></option><option value="Gurugram"></option></datalist><select name="interest" aria-label="Interested in">
                 <option>Residential</option>
                 <option>Commercial</option>
                 <option>Plots</option>

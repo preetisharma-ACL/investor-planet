@@ -280,7 +280,7 @@ img { max-width: 100%; display: block; }
 }
 /* The supplied artwork already contains the name, tagline and RERA line. */
 .logo__img {
-  height: 70px;
+  height: 78px;
   width: auto;
   display: block;
 }
@@ -300,10 +300,10 @@ img { max-width: 100%; display: block; }
 .footer .logo__img { height: 116px; padding: 8px 12px; border-radius: 14px; }
 
 @media (max-width: 991.98px) {
-  .logo__img { height: 56px; }
+  .logo__img { height: 62px; }
 }
 @media (max-width: 575.98px) {
-  .logo__img { height: 50px; }
+  .logo__img { height: 56px; }
   .logo--light .logo__img { height: 48px; }
   .footer .logo__img { height: 92px; }
 }
@@ -352,7 +352,7 @@ img { max-width: 100%; display: block; }
   align-items: center;
   gap: 32px;
   width: min(calc(100% - 2 * var(--r) - 16px), 1400px);
-  height: 80px;
+  height: 90px;
   margin: 0 auto;
   padding: 0 clamp(20px, 3.4vw, 52px);
   background: #fff;
@@ -378,7 +378,7 @@ img { max-width: 100%; display: block; }
   background: radial-gradient(circle at 100% 100%, transparent calc(var(--r) - 0.5px), #fff var(--r));
 }
 .is-scrolled .navbar-lux {
-  height: 80px;
+  height: 90px;
   box-shadow: 0 14px 40px -18px rgba(14, 22, 32, 0.35);
 }
 
@@ -462,15 +462,15 @@ img { max-width: 100%; display: block; }
 }
 @media (max-width: 991.98px) {
   .site-header { --r: 30px; }
-  .navbar-lux { height: 72px; width: calc(100% - 2 * var(--r) - 8px); }
-  .is-scrolled .navbar-lux { height: 66px; }
+  .navbar-lux { height: 80px; width: calc(100% - 2 * var(--r) - 8px); }
+  .is-scrolled .navbar-lux { height: 74px; }
   .navbar-lux__links { display: none; }
   .navbar-lux__actions { margin-left: auto; }
   .navbar-lux__burger { display: flex; }
 }
 @media (max-width: 575.98px) {
   .site-header { --r: 22px; }
-  .navbar-lux { height: 66px; padding: 0 10px 0 14px; width: calc(100% - 2 * var(--r)); }
+  .navbar-lux { height: 74px; padding: 0 10px 0 14px; width: calc(100% - 2 * var(--r)); }
   .navbar-lux__phone-text { display: none; }
 }
 
@@ -567,7 +567,8 @@ img { max-width: 100%; display: block; }
   transition: border-color 0.3s;
 }
 .cta__form input:focus, .cta__form select:focus { border-color: var(--gold); }
-.cta__form select { grid-column: 1 / -1; }
+/* Row 1 name + phone, row 2 interest + city, then the button across the full width. */
+.cta__form select { appearance: none; -webkit-appearance: none; padding-right: 40px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%230e1620' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; }
 .cta__submit {
   grid-column: 1 / -1;
   height: 58px;
@@ -618,7 +619,7 @@ img { max-width: 100%; display: block; }
   /* lowercase has descenders, so the box needs room below the baseline and the
      fade has to run past them, or the tails of "p" and "y" vanish */
   line-height: 1.2;
-  text-transform: lowercase;
+  text-transform: capitalize;
   text-align: center;
   letter-spacing: -0.02em;
   margin-top: clamp(40px, 6vw, 80px);
@@ -1186,22 +1187,6 @@ img { max-width: 100%; display: block; }
 .why__badge-num { font-size: 46px; line-height: 1; }
 .why__badge-num sup { font-size: 28px; top: -0.9em; }
 .why__badge-text { font-size: 14px; font-weight: 600; line-height: 1.4; }
-.why__ring {
-  position: absolute;
-  top: 24px;
-  right: 24px;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: rgba(14, 22, 32, 0.55);
-  backdrop-filter: blur(10px);
-  display: grid;
-  place-items: center;
-}
-.why__ring svg { position: absolute; inset: 0; animation: spin 18s linear infinite; }
-.why__ring text { fill: #fff; font-size: 10.5px; letter-spacing: 0.22em; font-weight: 600; }
-.why__ring span { color: var(--gold); font-size: 22px; }
-@keyframes spin { to { transform: rotate(360deg); } }
 
 .why__title { font-size: clamp(26px, 2.6vw, 36px); }
 .reasons { list-style: none; padding: 0; margin: 0; }
@@ -1248,7 +1233,6 @@ img { max-width: 100%; display: block; }
 @media (max-width: 575.98px) {
   .stat { padding: 28px 14px 0; }
   .stat:nth-child(odd) { padding-left: 0; }
-  .why__ring { width: 96px; height: 96px; top: 16px; right: 16px; }
   .why__badge { padding: 16px 18px; }
   .why__badge-num { font-size: 44px; }
 }
