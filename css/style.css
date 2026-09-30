@@ -3699,6 +3699,13 @@ img { max-width: 100%; display: block; }
   color: var(--brand-deep);
 }
 
+/*
+  Privacy / terms: the same reading column as an article, but with no sidebar to sit
+  beside, so it centres itself. scroll-margin keeps a linked heading (#disclaimer)
+  clear of the fixed header when it is jumped to.
+*/
+.legal__body { margin-inline: auto; }
+.legal .post__prose h2 { scroll-margin-top: 120px; }
 .post__prose { margin-top: clamp(26px, 3vw, 40px); }
 .post__prose h2 { font-size: clamp(21px, 2vw, 27px); margin: 34px 0 14px; }
 .post__prose h2:first-child { margin-top: 0; }
