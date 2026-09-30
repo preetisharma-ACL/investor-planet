@@ -20,7 +20,7 @@
       <ul class="navbar-lux__links">
         <li><a href="index.html" class="navbar-lux__link">Home</a></li>
         <li><a href="about.html" class="navbar-lux__link">About Us</a></li>
-        <li class="navbar-lux__has-menu"><a href="projects.html" class="navbar-lux__link is-active" aria-haspopup="true">Projects<svg class="navbar-lux__caret" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></a><div class="navbar-lux__menu"><div class="navbar-lux__panel"><a href="projects.html">All Projects<span>18</span></a><a href="property-type.html?type=residential">Residential<span>08</span></a><a href="property-type.html?type=commercial">Commercial<span>06</span></a><a href="property-type.html?type=plots">Plots<span>04</span></a></div></div></li><li><a href="locations.html" class="navbar-lux__link">Locations</a></li>
+        <li class="navbar-lux__has-menu"><a href="projects.html" class="navbar-lux__link is-active" aria-haspopup="true">Projects<svg class="navbar-lux__caret" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></a><div class="navbar-lux__menu"><div class="navbar-lux__panel"><a href="projects.html">All Projects<span>06</span></a><a href="property-type.html?type=residential">Residential<span>02</span></a><a href="property-type.html?type=commercial">Commercial<span>04</span></a></div></div></li><li><a href="locations.html" class="navbar-lux__link">Locations</a></li>
         <li><a href="blogs.html" class="navbar-lux__link">Blogs</a></li>
         <li><a href="careers.html" class="navbar-lux__link">Careers</a></li>
         <li><a href="contact.html" class="navbar-lux__link">Contact</a></li>
@@ -33,7 +33,7 @@
     <ul class="mobile-menu__links">
       <li><a href="index.html"><span class="mobile-menu__no">01</span>Home</a></li>
       <li><a href="about.html"><span class="mobile-menu__no">02</span>About Us</a></li>
-      <li><a href="projects.html"><span class="mobile-menu__no">03</span>Projects</a><ul class="mobile-menu__sub"><li><a href="projects.html">All Projects</a></li><li><a href="property-type.html?type=residential">Residential</a></li><li><a href="property-type.html?type=commercial">Commercial</a></li><li><a href="property-type.html?type=plots">Plots</a></li></ul></li>
+      <li><a href="projects.html"><span class="mobile-menu__no">03</span>Projects</a><ul class="mobile-menu__sub"><li><a href="projects.html">All Projects</a></li><li><a href="property-type.html?type=residential">Residential</a></li><li><a href="property-type.html?type=commercial">Commercial</a></li></ul></li>
       <li><a href="locations.html"><span class="mobile-menu__no">04</span>Locations</a></li>
       <li><a href="blogs.html"><span class="mobile-menu__no">05</span>Blogs</a></li>
       <li><a href="careers.html"><span class="mobile-menu__no">06</span>Careers</a></li>
@@ -46,9 +46,9 @@
       <div class="phero__bg"><img src="assets/images/hero3-1521.webp" srcset="assets/images/hero3-900.webp 900w, assets/images/hero3-1521.webp 1521w" alt sizes="100vw" loading="eager" fetchpriority="high" decoding="async" width="1521" height="795"></div>
       <div class="phero__shade"></div>
       <div class="container-xl phero__inner">
-        <nav class="phero__crumbs" aria-label="Breadcrumb" data-hero><a href="index.html">Home</a><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"></path></svg><span aria-current="page">Residential</span></nav><span class="eyebrow eyebrow--light" data-hero>Homes for every chapter</span>
-        <h1 class="phero__title" data-hero-title><span class="line"><span>Luxury homes,</span></span><span class="line"><span><em>thoughtfully chosen</em></span></span></h1>
-        <p class="phero__text" data-hero>Whether you are buying your first home or your next one, our experienced team is here to help you every step of the way, from shortlisting to handover.</p>
+        <nav class="phero__crumbs" aria-label="Breadcrumb" data-hero><a href="index.html">Home</a><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"></path></svg><span aria-current="page">Residential</span></nav><span class="eyebrow eyebrow--light" data-hero data-cat="eyebrow">Homes for every chapter</span>
+        <h1 class="phero__title" data-hero-title data-cat="title"><span class="line"><span>Luxury homes,</span></span><span class="line"><span><em>thoughtfully chosen</em></span></span></h1>
+        <p class="phero__text" data-hero data-cat="lead">Whether you are buying your first home or your next one, our experienced team is here to help you every step of the way, from shortlisting to handover.</p>
       </div><a href="#page-start" class="phero__scroll" aria-label="Scroll down" data-hero><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M6 13l6 6 6-6"></path></svg></a>
     </section><span id="page-start"></span><!-- Stats strip -->
     <section class="cstats">
@@ -65,7 +65,7 @@
       <div class="container-xl">
         <div class="types__head" data-reveal>
           <div><span class="eyebrow">Explore by type</span>
-            <h2 class="section-title">Find the right <em>residential fit</em></h2>
+            <h2 class="section-title" data-cat="types">Find the right <em>residential fit</em></h2>
           </div>
           <p class="section-lead mb-0">Every option is verified for approvals, title and delivery track record before it reaches you.</p>
         </div>
@@ -78,8 +78,8 @@
       </div>
       <div class="container-xl position-relative">
         <div class="why-cat__grid">
-          <div class="why-cat__intro" data-reveal><span class="eyebrow">Why residential</span>
-            <h2 class="section-title mb-3">Reasons buyers <em>choose residential</em></h2>
+          <div class="why-cat__intro" data-reveal><span class="eyebrow" data-cat="whyEyebrow">Why residential</span>
+            <h2 class="section-title mb-3" data-cat="why">Reasons buyers <em>choose residential</em></h2>
             <p class="section-lead">Our advisors walk you through the numbers so every decision is backed by data, not guesswork.</p><button type="button" class="btn-lux mt-3" data-cat-enquire>Talk to an expert<span class="btn-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></button>
           </div>
           <ul class="why-cat__list">
@@ -109,137 +109,106 @@
           <div><span class="eyebrow">Available now</span>
             <h2 class="section-title">Residential <em>projects</em></h2>
           </div>
-          <div class="cities" role="tablist" aria-label="Filter by city"><button type="button" class="cities__btn is-active" data-city="">All <span>8</span></button><button type="button" class="cities__btn" data-city="Gurugram">Gurugram <span>3</span></button><button type="button" class="cities__btn" data-city="Noida">Noida <span>3</span></button><button type="button" class="cities__btn" data-city="Sohna">Sohna <span>1</span></button><button type="button" class="cities__btn" data-city="Greater Noida">Greater Noida <span>1</span></button></div>
+          <div class="cities" role="tablist" aria-label="Filter by city" data-cities></div>
         </div>
         <div class="cprojects__grid">
-          <div class="cprojects__item" data-city="Gurugram">
-            <article class="pc" data-name="the crest residences premier developers sector 65, golf course ext. road gurugram" data-type="residential" data-city="Gurugram" data-status="New Launch" data-price="345" data-index="0"><a href="project-details.html" class="pc__media"><img src="assets/images/project-crest-residences-1400.webp" srcset="assets/images/project-crest-residences-420.webp 420w, assets/images/project-crest-residences-768.webp 768w, assets/images/project-crest-residences-1400.webp 1400w" alt="The Crest Residences" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="1400" height="933"><span class="pc__status">New Launch</span><span class="pc__type">residential</span></a>
-              <div class="pc__body"><span class="pc__dev">Premier Developers</span>
-                <h3 class="pc__name"><a href="project-details.html">The Crest Residences</a></h3>
-                <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Sector 65, Golf Course Ext. Road, Gurugram</p>
+          <div class="cprojects__item" data-city="Noida" data-type="commercial">
+  <article class="pc" data-name="m3m the line m3m sector 72, noida noida" data-type="commercial" data-city="Noida" data-status="Retail" data-price="" data-index="0"><a href="project-details.html" class="pc__media"><img src="assets/images/blogs/m3m-noida-800.webp" srcset="assets/images/blogs/m3m-noida-420.webp 420w, assets/images/blogs/m3m-noida-800.webp 800w, assets/images/blogs/m3m-noida-1400.webp 1400w" alt="M3M The Line" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="800" height="481"><span class="pc__status">Retail</span><span class="pc__type">commercial</span></a>
+              <div class="pc__body"><span class="pc__dev">M3M</span>
+                <h3 class="pc__name"><a href="project-details.html">M3M The Line</a></h3>
+                <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Sector 72, Noida</p>
                 <ul class="pc__meta">
-                  <li><small>Configuration</small>3 &amp; 4 BHK</li>
-                  <li><small>Size</small>2,150 – 3,800 sq.ft</li>
-                  <li><small>Possession</small>Dec 2029</li>
+                  <li><small>Floors</small>Lower ground + 5</li>
+                  <li><small>Frontage</small>300 metres</li>
+                  <li><small>Architect</small>DPA Consultants</li>
                 </ul>
                 <div class="pc__foot">
-                  <div class="pc__price"><small>Starting from</small>₹ 3.45 Cr*</div><a href="project-details.html" class="pc__btn" aria-label="View The Crest Residences"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+                  <div class="pc__price"><small>Starting from</small>₹ 28,000/sq.ft*</div><a href="project-details.html" class="pc__btn" aria-label="View M3M The Line"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
                 </div>
               </div>
             </article>
           </div>
-          <div class="cprojects__item" data-city="Noida">
-            <article class="pc" data-name="aurum towers meridian homes sector 150 noida" data-type="residential" data-city="Noida" data-status="Ready to Move" data-price="195" data-index="1"><a href="project-details.html" class="pc__media"><img src="assets/images/project-aurum-towers-1400.webp" srcset="assets/images/project-aurum-towers-700.webp 700w, assets/images/project-aurum-towers-1400.webp 1400w" alt="Aurum Towers" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="1400" height="1867"><span class="pc__status">Ready to Move</span><span class="pc__type">residential</span></a>
-              <div class="pc__body"><span class="pc__dev">Meridian Homes</span>
-                <h3 class="pc__name"><a href="project-details.html">Aurum Towers</a></h3>
-                <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Sector 150, Noida</p>
+          <div class="cprojects__item" data-city="Noida" data-type="commercial">
+  <article class="pc" data-name="eon – eye of noida eon sector 140a, noida noida" data-type="commercial" data-city="Noida" data-status="Office & Retail" data-price="36" data-index="1"><a href="project-details.html" class="pc__media"><img src="assets/images/investor-planet-900.webp" srcset="assets/images/investor-planet-420.webp 420w, assets/images/investor-planet-900.webp 900w, assets/images/investor-planet-1521.webp 1521w" alt="EON – Eye of Noida" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="900" height="470"><span class="pc__status">Office &amp; Retail</span><span class="pc__type">commercial</span></a>
+              <div class="pc__body"><span class="pc__dev">EON</span>
+                <h3 class="pc__name"><a href="project-details.html">EON &ndash; Eye of Noida</a></h3>
+                <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Sector 140A, Noida</p>
                 <ul class="pc__meta">
-                  <li><small>Configuration</small>2, 3 &amp; 4 BHK</li>
-                  <li><small>Size</small>1,350 – 3,200 sq.ft</li>
-                  <li><small>Possession</small>Ready</li>
+                  <li><small>Use</small>IT/ITES &amp; retail</li>
+                  <li><small>Certification</small>USGBC Gold</li>
+                  <li><small>Phases</small>4-phase development</li>
                 </ul>
                 <div class="pc__foot">
-                  <div class="pc__price"><small>Starting from</small>₹ 1.95 Cr*</div><a href="project-details.html" class="pc__btn" aria-label="View Aurum Towers"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+                  <div class="pc__price"><small>Starting from</small>₹ 36 Lacs*</div><a href="project-details.html" class="pc__btn" aria-label="View EON – Eye of Noida"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
                 </div>
               </div>
             </article>
           </div>
-          <div class="cprojects__item" data-city="Sohna">
-            <article class="pc" data-name="palm villas horizon estates sector 36 sohna" data-type="residential" data-city="Sohna" data-status="Under Construction" data-price="650" data-index="2"><a href="project-details.html" class="pc__media"><img src="assets/images/project-palm-villas-1400.webp" srcset="assets/images/project-palm-villas-700.webp 700w, assets/images/project-palm-villas-1400.webp 1400w" alt="Palm Villas" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="1400" height="933"><span class="pc__status">Under Construction</span><span class="pc__type">residential</span></a>
-              <div class="pc__body"><span class="pc__dev">Horizon Estates</span>
-                <h3 class="pc__name"><a href="project-details.html">Palm Villas</a></h3>
-                <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Sector 36, Sohna</p>
+          <div class="cprojects__item" data-city="Noida" data-type="commercial">
+  <article class="pc" data-name="bean majesty gygy infradesign plot 02, sector 140, noida noida" data-type="commercial" data-city="Noida" data-status="Dining & Retail" data-price="" data-index="2"><a href="project-details.html" class="pc__media"><img src="assets/images/blogs/gygy-noida-800.webp" srcset="assets/images/blogs/gygy-noida-420.webp 420w, assets/images/blogs/gygy-noida-800.webp 800w, assets/images/blogs/gygy-noida-1400.webp 1400w" alt="Bean Majesty" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="800" height="427"><span class="pc__status">Dining &amp; Retail</span><span class="pc__type">commercial</span></a>
+              <div class="pc__body"><span class="pc__dev">GYGY Infradesign</span>
+                <h3 class="pc__name"><a href="project-details.html">Bean Majesty</a></h3>
+                <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Plot 02, Sector 140, Noida</p>
                 <ul class="pc__meta">
-                  <li><small>Configuration</small>4 BHK Villas</li>
-                  <li><small>Size</small>4,200 – 5,600 sq.ft</li>
-                  <li><small>Possession</small>Sep 2027</li>
+                  <li><small>Use</small>Caf&eacute;, dining &amp; retail</li>
+                  <li><small>Setting</small>Corporate complex</li>
+                  <li><small>Seating</small>Indoor &amp; outdoor</li>
                 </ul>
                 <div class="pc__foot">
-                  <div class="pc__price"><small>Starting from</small>₹ 6.5 Cr*</div><a href="project-details.html" class="pc__btn" aria-label="View Palm Villas"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+                  <div class="pc__price"><small>Price</small>On request</div><a href="project-details.html" class="pc__btn" aria-label="View Bean Majesty"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
                 </div>
               </div>
             </article>
           </div>
-          <div class="cprojects__item" data-city="Gurugram">
-            <article class="pc" data-name="serene heights skyward realty sector 79 gurugram" data-type="residential" data-city="Gurugram" data-status="Under Construction" data-price="210" data-index="3"><a href="project-details.html" class="pc__media"><img src="assets/images/more-serene-heights-1400.webp" srcset="assets/images/more-serene-heights-640.webp 640w, assets/images/more-serene-heights-1400.webp 1400w" alt="Serene Heights" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="1400" height="933"><span class="pc__status">Under Construction</span><span class="pc__type">residential</span></a>
-              <div class="pc__body"><span class="pc__dev">Skyward Realty</span>
-                <h3 class="pc__name"><a href="project-details.html">Serene Heights</a></h3>
-                <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Sector 79, Gurugram</p>
+          <div class="cprojects__item" data-city="Greater Noida" data-type="residential">
+  <article class="pc" data-name="godrej majesty godrej properties greater noida greater noida" data-type="residential" data-city="Greater Noida" data-status="Apartments" data-price="" data-index="3"><a href="project-details.html" class="pc__media"><img src="assets/images/godrej-majesty-800.webp" srcset="assets/images/godrej-majesty-420.webp 420w, assets/images/godrej-majesty-800.webp 800w, assets/images/godrej-majesty-1310.webp 1310w" alt="Godrej Majesty" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="800" height="458"><span class="pc__status">Apartments</span><span class="pc__type">residential</span></a>
+              <div class="pc__body"><span class="pc__dev">Godrej Properties</span>
+                <h3 class="pc__name"><a href="project-details.html">Godrej Majesty</a></h3>
+                <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Greater Noida</p>
                 <ul class="pc__meta">
-                  <li><small>Configuration</small>3 BHK</li>
-                  <li><small>Size</small>1,850 – 2,100 sq.ft</li>
-                  <li><small>Possession</small>Dec 2027</li>
+                  <li><small>Homes</small>Modern flats</li>
+                  <li><small>Possession</small>On request</li>
+                  <li><small>Location</small>Greater Noida</li>
                 </ul>
                 <div class="pc__foot">
-                  <div class="pc__price"><small>Starting from</small>₹ 2.1 Cr*</div><a href="project-details.html" class="pc__btn" aria-label="View Serene Heights"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+                  <div class="pc__price"><small>Price</small>On request</div><a href="project-details.html" class="pc__btn" aria-label="View Godrej Majesty"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
                 </div>
               </div>
             </article>
           </div>
-          <div class="cprojects__item" data-city="Noida">
-            <article class="pc" data-name="casa bella crown realtors sector 108 noida" data-type="residential" data-city="Noida" data-status="New Launch" data-price="390" data-index="4"><a href="project-details.html" class="pc__media"><img src="assets/images/more-casa-bella-1400.webp" srcset="assets/images/more-casa-bella-700.webp 700w, assets/images/more-casa-bella-1400.webp 1400w" alt="Casa Bella" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="1400" height="952"><span class="pc__status">New Launch</span><span class="pc__type">residential</span></a>
-              <div class="pc__body"><span class="pc__dev">Crown Realtors</span>
-                <h3 class="pc__name"><a href="project-details.html">Casa Bella</a></h3>
-                <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Sector 108, Noida</p>
+          <div class="cprojects__item" data-city="Ghaziabad" data-type="commercial">
+  <article class="pc" data-name="anand habitat sahibabad mixed-use development sahibabad, u.p. ghaziabad" data-type="commercial" data-city="Ghaziabad" data-status="Mixed-use" data-price="" data-index="4"><a href="project-details.html" class="pc__media"><img src="assets/images/anand-habitat-731.webp" srcset="assets/images/anand-habitat-420.webp 420w, assets/images/anand-habitat-731.webp 731w" alt="Anand Habitat Sahibabad" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="731" height="477"><span class="pc__status">Mixed-use</span><span class="pc__type">commercial</span></a>
+              <div class="pc__body"><span class="pc__dev">Mixed-use development</span>
+                <h3 class="pc__name"><a href="project-details.html">Anand Habitat Sahibabad</a></h3>
+                <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Sahibabad, U.P.</p>
                 <ul class="pc__meta">
-                  <li><small>Configuration</small>4 BHK</li>
-                  <li><small>Size</small>3,100 – 3,600 sq.ft</li>
-                  <li><small>Possession</small>Mar 2030</li>
+                  <li><small>Frontage</small>600 ft wide road</li>
+                  <li><small>Metro</small>1 min to Sahibabad RRTS</li>
+                  <li><small>Airport</small>Within 7 km of Hindan</li>
                 </ul>
                 <div class="pc__foot">
-                  <div class="pc__price"><small>Starting from</small>₹ 3.9 Cr*</div><a href="project-details.html" class="pc__btn" aria-label="View Casa Bella"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+                  <div class="pc__price"><small>Price</small>On request</div><a href="project-details.html" class="pc__btn" aria-label="View Anand Habitat Sahibabad"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
                 </div>
               </div>
             </article>
           </div>
-          <div class="cprojects__item" data-city="Gurugram">
-            <article class="pc" data-name="riviera lofts urban axis sector 106, dwarka expressway gurugram" data-type="residential" data-city="Gurugram" data-status="Under Construction" data-price="160" data-index="5"><a href="project-details.html" class="pc__media"><img src="assets/images/more-riviera-lofts-1400.webp" srcset="assets/images/more-riviera-lofts-700.webp 700w, assets/images/more-riviera-lofts-1400.webp 1400w" alt="Riviera Lofts" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="1400" height="1042"><span class="pc__status">Under Construction</span><span class="pc__type">residential</span></a>
-              <div class="pc__body"><span class="pc__dev">Urban Axis</span>
-                <h3 class="pc__name"><a href="project-details.html">Riviera Lofts</a></h3>
-                <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Sector 106, Dwarka Expressway, Gurugram</p>
+          <div class="cprojects__item" data-city="Ghaziabad" data-type="residential">
+  <article class="pc" data-name="au sunflower aditya world city nh-24, ghaziabad ghaziabad" data-type="residential" data-city="Ghaziabad" data-status="Apartments" data-price="" data-index="5"><a href="project-details.html" class="pc__media"><img src="assets/images/au-sunflower-800.webp" srcset="assets/images/au-sunflower-420.webp 420w, assets/images/au-sunflower-800.webp 800w, assets/images/au-sunflower-1400.webp 1400w" alt="AU Sunflower" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="800" height="450"><span class="pc__status">Apartments</span><span class="pc__type">residential</span></a>
+              <div class="pc__body"><span class="pc__dev">Aditya World City</span>
+                <h3 class="pc__name"><a href="project-details.html">AU Sunflower</a></h3>
+                <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>NH-24, Ghaziabad</p>
                 <ul class="pc__meta">
-                  <li><small>Configuration</small>2 &amp; 3 BHK</li>
-                  <li><small>Size</small>1,150 – 1,900 sq.ft</li>
-                  <li><small>Possession</small>Jun 2028</li>
+                  <li><small>Towers</small>7 towers, 30 floors</li>
+                  <li><small>Area</small>6.94 acres</li>
+                  <li><small>Units</small>428 units</li>
                 </ul>
                 <div class="pc__foot">
-                  <div class="pc__price"><small>Starting from</small>₹ 1.6 Cr*</div><a href="project-details.html" class="pc__btn" aria-label="View Riviera Lofts"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+                  <div class="pc__price"><small>Price</small>On request</div><a href="project-details.html" class="pc__btn" aria-label="View AU Sunflower"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
                 </div>
               </div>
             </article>
           </div>
-          <div class="cprojects__item" data-city="Greater Noida">
-            <article class="pc" data-name="lakeview greens horizon estates greater noida west greater noida" data-type="residential" data-city="Greater Noida" data-status="Ready to Move" data-price="88" data-index="6"><a href="project-details.html" class="pc__media"><img src="assets/images/offer-residential-1400.webp" srcset="assets/images/offer-residential-420.webp 420w, assets/images/offer-residential-800.webp 800w, assets/images/offer-residential-1400.webp 1400w" alt="Lakeview Greens" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="1400" height="929"><span class="pc__status">Ready to Move</span><span class="pc__type">residential</span></a>
-              <div class="pc__body"><span class="pc__dev">Horizon Estates</span>
-                <h3 class="pc__name"><a href="project-details.html">Lakeview Greens</a></h3>
-                <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Greater Noida West, Greater Noida</p>
-                <ul class="pc__meta">
-                  <li><small>Configuration</small>2 &amp; 3 BHK</li>
-                  <li><small>Size</small>1,050 – 1,650 sq.ft</li>
-                  <li><small>Possession</small>Ready</li>
-                </ul>
-                <div class="pc__foot">
-                  <div class="pc__price"><small>Starting from</small>₹ 88 L*</div><a href="project-details.html" class="pc__btn" aria-label="View Lakeview Greens"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
-                </div>
-              </div>
-            </article>
-          </div>
-          <div class="cprojects__item" data-city="Noida">
-            <article class="pc" data-name="horizon sky suites horizon estates sector 128, noida expressway noida" data-type="residential" data-city="Noida" data-status="New Launch" data-price="420" data-index="7"><a href="project-details.html" class="pc__media"><img src="assets/images/skyline-dusk-2000.webp" srcset="assets/images/skyline-dusk-420.webp 420w, assets/images/skyline-dusk-900.webp 900w" alt="Horizon Sky Suites" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 420px" loading="lazy" decoding="async" width="5968" height="3979"><span class="pc__status">New Launch</span><span class="pc__type">residential</span></a>
-              <div class="pc__body"><span class="pc__dev">Horizon Estates</span>
-                <h3 class="pc__name"><a href="project-details.html">Horizon Sky Suites</a></h3>
-                <p class="pc__loc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Sector 128, Noida Expressway, Noida</p>
-                <ul class="pc__meta">
-                  <li><small>Configuration</small>3 &amp; 4 BHK</li>
-                  <li><small>Size</small>2,400 – 4,100 sq.ft</li>
-                  <li><small>Possession</small>Dec 2030</li>
-                </ul>
-                <div class="pc__foot">
-                  <div class="pc__price"><small>Starting from</small>₹ 4.2 Cr*</div><a href="project-details.html" class="pc__btn" aria-label="View Horizon Sky Suites"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
-                </div>
-              </div>
-            </article>
-          </div>
+          <p class="cprojects__empty" data-cprojects-empty hidden>We do not have any projects listed in this category right now. <a href="projects.html">See all our projects</a> or <a href="#contact">tell us what you are looking for</a>.</p>
         </div>
         <div class="text-center mt-5" data-reveal><a href="projects.html?type=residential" class="btn-lux btn-lux--ghost">Filter all residential projects<span class="btn-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a></div>
       </div>
@@ -273,7 +242,7 @@
     <section class="section cfaq">
       <div class="container-xl cfaq__grid">
         <div data-reveal><span class="eyebrow">FAQs</span>
-          <h2 class="section-title">Residential buying, <em>answered</em></h2>
+          <h2 class="section-title" data-cat="faq">Residential buying, <em>answered</em></h2>
           <p class="section-lead mt-3">Still unsure? Our advisors are happy to help, with no obligation.</p>
         </div>
         <div class="cfaq__list" data-reveal>
@@ -301,7 +270,7 @@
         <div class="text-center mb-5" data-reveal><span class="eyebrow justify-content-center">Also explore</span>
           <h2 class="section-title">Other <em>categories</em></h2>
         </div>
-        <div class="others__grid"><a href="property-type.html?type=commercial" class="ocard" data-reveal><img src="assets/images/offer-commercial-1400.webp" srcset="assets/images/offer-commercial-800.webp 800w, assets/images/offer-commercial-1400.webp 1400w" alt sizes="(max-width: 767px) 100vw, 50vw" loading="lazy" decoding="async" width="1400" height="933" class="ocard__img"><span class="ocard__shade"></span><span class="ocard__body"><span class="ocard__count">60+ Projects</span><strong class="font-head">Commercial</strong><span>Grade-A offices, high-street retail and food courts built for steady rental yields.</span></span><span class="tcard__arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a><a href="property-type.html?type=plots" class="ocard" data-reveal><img src="assets/images/offer-plots-1400.webp" srcset="assets/images/offer-plots-800.webp 800w, assets/images/offer-plots-1400.webp 1400w" alt sizes="(max-width: 767px) 100vw, 50vw" loading="lazy" decoding="async" width="1400" height="788" class="ocard__img"><span class="ocard__shade"></span><span class="ocard__body"><span class="ocard__count">35+ Projects</span><strong class="font-head">Plots</strong><span>RERA-approved residential and farmhouse plots in the fastest growing corridors.</span></span><span class="tcard__arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a></div>
+        <div class="others__grid"><a href="property-type.html?type=residential" class="ocard" data-otype="residential" data-reveal><img src="assets/images/offer-residential-800.webp" srcset="assets/images/offer-residential-420.webp 420w, assets/images/offer-residential-800.webp 800w" alt sizes="(max-width: 767px) 100vw, 50vw" loading="lazy" decoding="async" width="800" height="531" class="ocard__img"><span class="ocard__shade"></span><span class="ocard__body"><span class="ocard__count" data-ocount>Projects</span><strong class="font-head">Residential</strong><span>Apartments and gated communities from developers we market directly.</span></span><span class="tcard__arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a><a href="property-type.html?type=commercial" class="ocard" data-otype="commercial" data-reveal><img src="assets/images/offer-commercial-612.webp" srcset="assets/images/offer-commercial-420.webp 420w, assets/images/offer-commercial-612.webp 612w" alt sizes="(max-width: 767px) 100vw, 50vw" loading="lazy" decoding="async" width="1400" height="933" class="ocard__img"><span class="ocard__shade"></span><span class="ocard__body"><span class="ocard__count" data-ocount>Projects</span><strong class="font-head">Commercial</strong><span>Grade-A offices, high-street retail and food courts built for steady rental yields.</span></span><span class="tcard__arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a><a href="property-type.html?type=plots" class="ocard" data-otype="plots" data-reveal><img src="assets/images/offer-plots-1400.webp" srcset="assets/images/offer-plots-800.webp 800w, assets/images/offer-plots-1400.webp 1400w" alt sizes="(max-width: 767px) 100vw, 50vw" loading="lazy" decoding="async" width="1400" height="788" class="ocard__img"><span class="ocard__shade"></span><span class="ocard__body"><span class="ocard__count" data-ocount>Projects</span><strong class="font-head">Plots</strong><span>RERA-approved residential and farmhouse plots in the fastest growing corridors.</span></span><span class="tcard__arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a></div>
       </div>
     </section>
   </main>
@@ -349,7 +318,7 @@
           <ul class="footer__links">
             <li><a href="property-type.html?type=residential">Residential</a></li>
             <li><a href="property-type.html?type=commercial">Commercial</a></li>
-            <li><a href="property-type.html?type=plots">Plots</a></li>
+            
             <li><a href="projects.html?status=New+Launch">New Launches</a></li>
             <li><a href="projects.html?status=Ready+to+Move">Ready to Move</a></li>
           </ul>

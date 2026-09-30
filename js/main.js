@@ -360,18 +360,145 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
 
   // Gates: start closed in the middle, slide apart to the sides as the section scrolls in.
 
-  // City filter for the project grid.
-  const btns = [...document.querySelectorAll('.cities__btn')];
+  /*
+    One template serves Residential / Commercial / Plots, picked by ?type= in the URL.
+    The grid holds every project once; this narrows it to the requested category and
+    rebuilds the city chips and the stats strip from whatever is actually left, so the
+    counts can never drift away from the cards on screen.
+  */
+  const TYPES = {
+    residential: {
+      label: 'Residential', heading: 'Residential <em>projects</em>', plural: 'residential projects',
+      eyebrow: 'Homes for every chapter',
+      title: ['Luxury homes,', 'thoughtfully chosen'],
+      lead: 'Whether you are buying your first home or your next one, our experienced team is here to help you every step of the way, from shortlisting to handover.',
+      types: 'Find the right <em>residential fit</em>',
+      whyEyebrow: 'Why residential', why: 'Reasons buyers <em>choose residential</em>',
+      faq: 'Residential buying, <em>answered</em>',
+    },
+    commercial: {
+      label: 'Commercial', heading: 'Commercial <em>projects</em>', plural: 'commercial projects',
+      eyebrow: 'Offices, retail and dining',
+      title: ['Commercial space,', 'chosen for returns'],
+      lead: 'Retail frontage, Grade-A offices and food courts from developers we market directly. We walk you through the numbers before you commit.',
+      types: 'Find the right <em>commercial fit</em>',
+      whyEyebrow: 'Why commercial', why: 'Reasons investors <em>choose commercial</em>',
+      faq: 'Commercial buying, <em>answered</em>',
+    },
+    plots: {
+      label: 'Plots', heading: 'Plots &amp; <em>land</em>', plural: 'plots',
+      eyebrow: 'Build it your way',
+      title: ['Land to build on,', 'checked end to end'],
+      lead: 'Tell us the corridor and the budget you have in mind and we will bring you plots with the approvals and title already verified.',
+      types: 'Find the right <em>plot</em>',
+      whyEyebrow: 'Why plots', why: 'Reasons buyers <em>choose plots</em>',
+      faq: 'Buying land, <em>answered</em>',
+    },
+  };
+  const grid = document.querySelector('.cprojects__grid');
   const items = [...document.querySelectorAll('.cprojects__item')];
-  btns.forEach((b) =>
-    b.addEventListener('click', () => {
-      btns.forEach((x) => x.classList.toggle('is-active', x === b));
-      items.forEach((it) => {
-        it.hidden = !!b.dataset.city && it.dataset.city !== b.dataset.city;
-        if (!it.hidden) it.animate([{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'none' }], { duration: 450, easing: 'ease-out' });
+
+  if (grid && items.length) {
+    const asked = (new URLSearchParams(location.search).get('type') || '').toLowerCase();
+    const type = TYPES[asked] ? asked : 'residential';
+    const meta = TYPES[type];
+    document.documentElement.setAttribute('data-cat', type);
+
+    // narrow to the category
+    const mine = items.filter((it) => it.dataset.type === type);
+    items.forEach((it) => { it.hidden = it.dataset.type !== type; });
+
+    const empty = document.querySelector('[data-cprojects-empty]');
+    if (empty) empty.hidden = mine.length > 0;
+
+    // page furniture that would otherwise contradict the grid
+    document.title = meta.label + ' Properties in Noida & Ghaziabad | Investors Planet Realty';
+    const crumb = document.querySelector('.phero__crumbs [aria-current]');
+    if (crumb) crumb.textContent = meta.label;
+    // headings that name the category; anything with real per-category facts behind it
+    // (the three type tiles, the "why" reasons, the FAQ answers) stays as authored.
+    document.querySelectorAll('[data-cat]').forEach((el) => {
+      const copy = meta[el.dataset.cat];
+      if (!copy) return;
+      if (Array.isArray(copy)) {
+        /*
+          The hero h1 is pre-split into .line > span, and the intro tween keeps a
+          reference to each of those spans. Replacing the markup would leave the
+          tween animating detached nodes while the fresh ones stay parked below
+          their clipped line box, so only the text inside them is swapped.
+        */
+        el.querySelectorAll('.line > span').forEach((span, i) => {
+          if (copy[i] == null) return;
+          (span.querySelector('em') || span).textContent = copy[i];
+        });
+      } else {
+        el.innerHTML = copy;
+      }
+    });
+    const secTitle = document.querySelector('.cprojects .section-title');
+    if (secTitle) secTitle.innerHTML = meta.heading;
+    const more = document.querySelector('.cprojects a.btn-lux--ghost');
+    if (more) {
+      more.setAttribute('href', 'projects.html?type=' + type);
+      const icon = more.querySelector('.btn-icon');
+      more.textContent = 'See all ' + meta.plural;
+      if (icon) more.appendChild(icon);
+    }
+    // Other-category tiles: drop the one you are already on, and any category with
+    // nothing to show, so no tile ever leads to an empty page. Counts come from the grid.
+    const countOf = (t) => items.filter((it) => it.dataset.type === t).length;
+    document.querySelectorAll('.others__grid .ocard').forEach((a) => {
+      const t = a.dataset.otype;
+      const n = countOf(t);
+      a.hidden = t === type || n === 0;
+      const c = a.querySelector('[data-ocount]');
+      if (c) c.textContent = String(n).padStart(2, '0') + (n === 1 ? ' Project' : ' Projects');
+    });
+
+    // stats strip, derived from the visible cards only
+    const setStat = (label, value, sub) => {
+      const li = [...document.querySelectorAll('.cstat')].find((x) => {
+        const l = x.querySelector('.cstat__label');
+        return l && l.textContent.trim().toLowerCase() === label;
       });
-    }),
-  );
+      if (!li) return;
+      const v = li.querySelector('.cstat__value'); if (v) v.textContent = value;
+      const sb = li.querySelector('.cstat__sub'); if (sb && sub != null) sb.textContent = sub;
+    };
+    const cities = [...new Set(mine.map((it) => it.dataset.city))];
+    const priced = mine
+      .map((it) => { const p = it.querySelector('.pc__price'); if (!p) return ''; const s = p.querySelector('small'); return (s ? p.textContent.replace(s.textContent, '') : p.textContent).trim(); })
+      .filter((t) => t && !/^on request$/i.test(t));
+    setStat('projects listed', String(mine.length).padStart(2, '0'), 'Marketed by Investors Planet');
+    setStat('price range', priced.length ? 'From ' + priced[priced.length - 1].replace(/\*$/, '') : 'On request', priced.length ? 'Official developer pricing' : 'Share your budget and we will advise');
+    setStat('locations', cities.length ? cities.length + (cities.length === 1 ? ' City' : ' Cities') : '—', cities.join(' · ') || 'Tell us where you are looking');
+
+    // city chips, built from what survived the category filter
+    const bar = document.querySelector('[data-cities]');
+    if (bar) {
+      const counts = cities.map((c) => [c, mine.filter((it) => it.dataset.city === c).length]);
+      const chip = (city, label, n, active) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'cities__btn' + (active ? ' is-active' : '');
+        b.dataset.city = city;
+        b.append(label + ' ', Object.assign(document.createElement('span'), { textContent: String(n).padStart(2, '0') }));
+        return b;
+      };
+      bar.replaceChildren(chip('', 'All', mine.length, true), ...counts.map(([c, n]) => chip(c, c, n, false)));
+      bar.hidden = counts.length < 2;
+
+      bar.addEventListener('click', (e) => {
+        const b = e.target.closest('.cities__btn');
+        if (!b) return;
+        [...bar.children].forEach((x) => x.classList.toggle('is-active', x === b));
+        mine.forEach((it) => {
+          it.hidden = !!b.dataset.city && it.dataset.city !== b.dataset.city;
+          if (!it.hidden) it.animate([{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'none' }], { duration: 450, easing: 'ease-out' });
+        });
+      });
+    }
+  }
 
   // "Talk to an expert" scrolls to the footer call-back form.
   const expert = document.querySelector('[data-cat-enquire]');
