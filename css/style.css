@@ -2316,7 +2316,11 @@ img { max-width: 100%; display: block; }
   font-size: 12px;
   font-weight: 600;
 }
-.pc__status { left: 14px; background: var(--gold); color: var(--ink); }
+.pc__status {
+   left: 14px;
+    background: #5f87b7;
+    color: #FFF;
+}; 
 .pc__type { right: 14px; text-transform: capitalize; background: rgba(14, 22, 32, 0.55); color: #fff; backdrop-filter: blur(8px); }
 
 .pc__body { padding: 20px 14px 10px; display: flex; flex-direction: column; flex: 1; }
