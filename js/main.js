@@ -60,8 +60,15 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
   lenis.on('scroll', ({ scroll }) => {
     if (!header) return;
     header.classList.toggle('is-scrolled', scroll > 60);
+    /*
+      The bar retracts on the way down. 400px suits a desktop hero, but a phone hero
+      is barely taller than that, so the search panel reached the bar while it was
+      still on screen and slid underneath it. Below the tablet breakpoint, retract
+      relative to the viewport instead, which clears the bar before anything meets it.
+    */
+    const hideAfter = window.innerWidth <= 991 ? Math.round(window.innerHeight * 0.28) : 400;
     // Headers marked data-sticky (e.g. the project page nav) stay visible.
-    if (!('sticky' in header.dataset)) header.classList.toggle('is-hidden', scroll > 400 && scroll > lastY);
+    if (!('sticky' in header.dataset)) header.classList.toggle('is-hidden', scroll > hideAfter && scroll > lastY);
     lastY = scroll;
   });
 })();

@@ -382,7 +382,10 @@ img { max-width: 100%; display: block; }
   height: 90px;
   box-shadow: 0 14px 40px -18px rgba(14, 22, 32, 0.35);
 }
-.is-scrolled .logo__img { height: 86px; }
+/* Only the desktop bar shrinks on scroll (105 -> 90), so only there does the mark. */
+@media (min-width: 992px) {
+  .is-scrolled .logo__img { height: 86px; }
+}
 
 .navbar-lux__links {
   display: flex;
@@ -991,8 +994,8 @@ img { max-width: 100%; display: block; }
 }
 @media (max-width: 575.98px) {
   .hero { padding: 120px 0 64px; align-items: flex-start; }
-  .search__body { grid-template-columns: 1fr; border-radius: 0 18px 18px 18px; }
-  .search__tabs { display: flex; width: 100%; }
+  .search__body { grid-template-columns: 1fr; border-radius: 0 0 18px 18px; }
+  .search__tabs { display: flex; width: 100%; border-radius: 18px 18px 0 0; }
   .search__tab { flex: 1; padding: 10px 8px; }
   .popular__label { width: 100%; margin: 0; }
   .hero__eyebrow { font-size: 11px; letter-spacing: 0.18em; }
@@ -1444,12 +1447,12 @@ img { max-width: 100%; display: block; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 991.98px) {
-  .logo-wall { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 112px; }
+  .logo-wall { grid-template-columns: repeat(4, 1fr); grid-auto-rows: minmax(112px, auto); }
   .logo-wall__center { grid-column: 1 / -1; grid-row: auto; order: -1; padding: 40px 24px; }
   .logo-cell:nth-of-type(n + 14) { display: none; } /* keep a full last row (12 logos) */
 }
 @media (max-width: 575.98px) {
-  .logo-wall { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 92px; border-radius: 22px; }
+  .logo-wall { grid-template-columns: repeat(3, 1fr); grid-auto-rows: minmax(92px, auto); border-radius: 22px; }
   .logo-cell__img { max-width: 72%; max-height: calc(34px * var(--s, 1)); }
 }
 
