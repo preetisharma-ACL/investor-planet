@@ -192,6 +192,24 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
   window.addEventListener('resize', initBar);
   if (document.fonts) document.fonts.ready.then(initBar);
 
+  /*
+    The home grid is a shortlist, not the catalogue: show at most six cards within
+    whichever filter is active. The chip counts stay the real totals, and the link
+    under the grid goes to the full listing.
+  */
+  const MAX = 6;
+  const apply = (key) => {
+    let shown = 0;
+    items.forEach((it) => {
+      const matches = key === 'all' || it.dataset.type === key;
+      const show = matches && shown < MAX;
+      if (show) shown += 1;
+      it.classList.toggle('is-hidden', !show);
+    });
+    return [...items].filter((it) => !it.classList.contains('is-hidden'));
+  };
+  apply((document.querySelector('.filters__btn.is-active') || {}).dataset?.filter || 'all');
+
   buttons.forEach((btn) =>
     btn.addEventListener('click', () => {
       const key = btn.dataset.filter;
@@ -200,8 +218,7 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
         b.setAttribute('aria-selected', String(b === btn));
       });
       moveBar(btn);
-      items.forEach((it) => it.classList.toggle('is-hidden', key !== 'all' && it.dataset.type !== key));
-      const visible = [...items].filter((it) => !it.classList.contains('is-hidden'));
+      const visible = apply(key);
       gsap.fromTo(
         visible.map((v) => v.firstElementChild),
         { autoAlpha: 0, y: 30 },
