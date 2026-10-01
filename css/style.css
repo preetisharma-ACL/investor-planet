@@ -283,6 +283,7 @@ img { max-width: 100%; display: block; }
   height: 105px;
   width: auto;
   display: block;
+  transition: height 0.5s var(--ease);
 }
 .logo--light { color: #fff; }
 /*
@@ -381,6 +382,7 @@ img { max-width: 100%; display: block; }
   height: 90px;
   box-shadow: 0 14px 40px -18px rgba(14, 22, 32, 0.35);
 }
+.is-scrolled .logo__img { height: 86px; }
 
 .navbar-lux__links {
   display: flex;
@@ -2396,11 +2398,7 @@ img { max-width: 100%; display: block; }
   font-size: 12px;
   font-weight: 600;
 }
-.pc__status {
-   left: 14px;
-    background: #5f87b7;
-    color: #FFF;
-}; 
+.pc__status { left: 14px; background: #5f87b7; color: #fff; }
 .pc__type { right: 14px; text-transform: capitalize; background: rgba(14, 22, 32, 0.55); color: #fff; backdrop-filter: blur(8px); }
 
 .pc__body { padding: 20px 14px 10px; display: flex; flex-direction: column; flex: 1; }
@@ -3562,84 +3560,141 @@ img { max-width: 100%; display: block; }
 
 .team__grid {
   list-style: none;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(14px, 1.6vw, 24px);
+  /* two wide cards read as a leadership line-up; a third or fourth wraps on its own */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr));
+  gap: clamp(18px, 2vw, 26px);
+  max-width: 1040px;
 }
+
+/*
+  Landscape cards. The portraits are only 173px square at source, so the frame is
+  held at a size that never upscales them; the card earns its presence from the
+  layout and the monogram instead of from a blown-up photograph.
+*/
 .tmember {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   display: flex;
-  flex-direction: column;
-  padding: 14px 14px 24px;
-  border-radius: 20px;
-  border: 1px solid rgba(106, 151, 204, 0.2);
-  background: linear-gradient(180deg, var(--ivory) 0%, #f1ebe1 100%);
-  transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+  align-items: center;
+  gap: clamp(16px, 1.8vw, 24px);
+  padding: clamp(18px, 2vw, 26px);
+  border-radius: 26px;
+  background: linear-gradient(135deg, #ffffff 0%, var(--ivory) 58%, #f1ebe1 100%);
+  border: 1px solid rgba(106, 151, 204, 0.22);
+  box-shadow: 0 1px 2px rgba(14, 22, 32, 0.04), 0 26px 54px -38px rgba(18, 49, 95, 0.55);
+  transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease), border-color 0.5s var(--ease);
+}
+/* a soft brand wash behind the portrait corner */
+.tmember::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: -70px;
+  top: -80px;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(106, 151, 204, 0.3), transparent 70%);
+}
+/* initials set oversized and very faint, so the card has depth without clutter */
+.tmember::after {
+  content: attr(data-initials);
+  position: absolute;
+  z-index: -1;
+  right: 16px;
+  bottom: -26px;
+  font-family: var(--font-head);
+  font-size: 104px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.045em;
+  color: rgba(31, 92, 158, 0.07);
+  transition: color 0.5s var(--ease), transform 0.6s var(--ease);
 }
 .tmember:hover {
   transform: translateY(-6px);
-  box-shadow: 0 30px 52px -26px rgba(18, 49, 95, 0.4);
+  border-color: rgba(106, 151, 204, 0.5);
+  box-shadow: 0 1px 2px rgba(14, 22, 32, 0.04), 0 34px 60px -32px rgba(18, 49, 95, 0.5);
 }
+.tmember:hover::after { color: rgba(31, 92, 158, 0.11); transform: translateY(-4px); }
 
-/* the well: a white mount the portrait sits inside, full card width */
+/* the well: a white mount the portrait sits inside */
 .tmember__well {
-  display: grid;
-  place-items: center;
-  padding: 16px 12px;
-  border-radius: 14px;
+  flex: 0 0 auto;
+  padding: 7px;
+  border-radius: 22px;
   background: #fff;
-  box-shadow: inset 0 0 0 1px rgba(14, 22, 32, 0.05);
+  box-shadow: 0 14px 30px -20px rgba(18, 49, 95, 0.7), inset 0 0 0 1px rgba(14, 22, 32, 0.05);
 }
 .tmember__well img {
-  width: 100%;
-  max-width: 168px;
-  height: auto;
-  aspect-ratio: 1;
+  width: 148px;
+  height: 166px;
   object-fit: cover;
+  object-position: center 22%;
   display: block;
-  border-radius: 10px;
-  box-shadow: 0 12px 26px -16px rgba(18, 49, 95, 0.75);
+  border-radius: 16px;
   transition: transform 0.6s var(--ease);
 }
-.tmember:hover .tmember__well img { transform: scale(1.035); }
+.tmember:hover .tmember__well img { transform: scale(1.04); }
 
-.tmember__body { text-align: center; padding: 0 4px; }
-/* a short brand rule sets the name off from the portrait */
-.tmember__body::before {
+.tmember__body { display: grid; gap: 0; min-width: 0; }
+.tmember__name { margin: 7px 0 0; font-size: clamp(20px, 1.7vw, 23px); line-height: 1.25; color: var(--ink); }
+/* a short brand rule between the name and the action */
+.tmember__name::after {
   content: '';
   display: block;
-  width: 32px;
+  width: 34px;
   height: 2px;
-  margin: 18px auto 14px;
+  margin: 14px 0 0;
   border-radius: 2px;
   background: var(--brand);
   transition: width 0.45s var(--ease), background 0.45s var(--ease);
 }
-.tmember:hover .tmember__body::before { width: 52px; background: var(--brand-deep); }
-.tmember__name { margin: 0; font-size: 21px; color: var(--ink); }
+.tmember:hover .tmember__name::after { width: 58px; background: var(--brand-deep); }
 .tmember__role {
   display: block;
-  margin-top: 8px;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11.5px;
+  font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--brand-deep);
 }
+.tmember__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 14px;
+  justify-self: start;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
+  transition: color 0.35s var(--ease), gap 0.35s var(--ease);
+}
+.tmember__cta svg { transition: transform 0.35s var(--ease); }
+.tmember__cta:hover { color: var(--brand-deep); gap: 11px; }
+.tmember__cta:hover svg { transform: translateX(2px); }
+
 
 @media (max-width: 1199.98px) {
-  .team__grid { grid-template-columns: repeat(2, 1fr); }
+  .team__grid { max-width: 680px; }
 }
 @media (max-width: 767.98px) {
-  .tmember { padding: 12px 12px 20px; }
-  .tmember__well { padding: 12px 10px; }
-  .tmember__well img { max-width: 150px; }
-  .tmember__name { font-size: 19px; }
+  .tmember__well img { width: 132px; height: 150px; }
+  .tmember::after { font-size: 86px; }
 }
 @media (max-width: 479.98px) {
-  .team__grid { grid-template-columns: 1fr; max-width: 300px; margin-inline: auto; }
-  .tmember__well img { max-width: 176px; }
+  /* too narrow to sit side by side: stack and centre instead */
+  .tmember { flex-direction: column; text-align: center; gap: 16px; }
+  .tmember__body { justify-items: center; }
+  .tmember__name::after { margin-inline: auto; }
+  .tmember__cta { justify-self: center; }
+  .tmember::after { right: 50%; transform: translateX(50%); bottom: -18px; }
+  .tmember:hover::after { transform: translateX(50%) translateY(-4px); }
+  .tmember__well img { width: 150px; height: 170px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .tmember, .tmember__well img, .tmember__body::before { transition: none; }
