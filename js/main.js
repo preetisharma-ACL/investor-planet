@@ -1030,3 +1030,16 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
     }),
   );
 })();
+
+/* ==========================================================================
+   First-load splash: take it out of the document once its exit has played.
+   The animation above does the hiding; this only stops it lingering in the DOM.
+   ========================================================================== */
+(function () {
+  const el = document.querySelector('.splash');
+  if (!el || !document.documentElement.classList.contains('has-splash')) return;
+  const drop = () => { el.remove(); document.documentElement.classList.remove('has-splash'); };
+  el.addEventListener('animationend', (e) => { if (e.animationName === 'splashOut') drop(); });
+  // belt and braces: if the animation never reports, clear it anyway
+  window.setTimeout(drop, 4000);
+})();
