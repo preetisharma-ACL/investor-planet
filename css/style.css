@@ -685,10 +685,9 @@ img { max-width: 100%; display: block; }
 
 
 /* ==========================================================================
-   First-load splash
-   Only painted when the head script has flagged this as the first page of the
-   session. The exit is a CSS animation rather than a JS callback, so the screen
-   always clears itself even if a script later on the page fails.
+   First-visit splash
+   Plain white. The exit is a CSS animation rather than a JS callback, so the
+   screen always clears itself even if a script later on the page fails.
    ========================================================================== */
 .splash { display: none; }
 .has-splash .splash {
@@ -698,41 +697,103 @@ img { max-width: 100%; display: block; }
   z-index: 9999;
   place-items: center;
   padding: 24px;
-  background: radial-gradient(ellipse 90% 70% at 50% 40%, #1b2a3d 0%, var(--ink) 62%);
-  animation: splashOut 2.3s var(--ease) forwards;
-}
-.splash__inner { display: grid; justify-items: center; gap: clamp(22px, 3vw, 34px); text-align: center; }
-.splash__logo {
-  width: clamp(130px, 17vw, 190px);
-  height: auto;
-  padding: 10px 14px;
-  border-radius: 16px;
   background: #fff;
-  animation: splashLogo 0.9s var(--ease) both;
+  animation: splashOut 2.4s var(--ease) forwards;
 }
+.splash__inner { display: grid; justify-items: center; gap: clamp(20px, 2.6vw, 30px); text-align: center; }
+
+/* ----- the mark ----- */
+.splash__mark {
+  position: relative;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+  /* square, so the halo and ring below are circles rather than ellipses */
+  width: clamp(152px, 17.5vw, 206px);
+  aspect-ratio: 1;
+}
+/* a soft brand wash that breathes behind the logo */
+.splash__mark::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: -12%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(106, 151, 204, 0.26), transparent 66%);
+  animation: splashHalo 2.6s var(--ease) 0.2s infinite;
+}
+/* a ring that pushes outwards and dissolves, twice over the hold */
+.splash__mark::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 4%;
+  border-radius: 50%;
+  border: 1px solid rgba(31, 92, 158, 0.4);
+  animation: splashRing 1.9s var(--ease) 0.45s infinite;
+}
+.splash__logo {
+  position: relative;
+  width: clamp(96px, 11vw, 132px);
+  height: auto;
+  animation: splashLogo 0.95s var(--ease) both;
+}
+
+/* ----- the headline ----- */
 .splash__line {
   margin: 0;
   font-family: var(--font-head);
-  font-size: clamp(26px, 4.4vw, 46px);
-  line-height: 1.16;
+  font-size: clamp(20px, 2.8vw, 30px);
+  line-height: 1.22;
   font-weight: 400;
-  color: #fff;
+  color: var(--ink);
 }
-.splash__line span { display: block; animation: splashLine 0.8s var(--ease) both; }
-.splash__line span:first-child { animation-delay: 0.26s; }
-.splash__line span:last-child { animation-delay: 0.4s; }
-.splash__line em { font-style: normal; color: var(--brand-light); }
+/* the outer span clips, the inner one travels up through it */
+.splash__l { display: block; overflow: hidden; padding-bottom: 0.08em; }
+.splash__l > i { display: block; font-style: normal; animation: splashLine 0.85s var(--ease) both; }
+.splash__l:first-child > i { animation-delay: 0.3s; }
+.splash__l:last-child > i { animation-delay: 0.44s; }
+/* "into reality" carries the same gradient the section headings use */
+.splash__line em { font-style: normal; color: var(--brand-deep); }
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .splash__line em {
+    background-image: linear-gradient(100deg, var(--brand-deep) 0%, #2f78c4 28%, #7fb0e6 50%, #2f78c4 72%, var(--brand-deep) 100%);
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: splashShine 2.6s linear 0.9s infinite;
+  }
+}
 
-@keyframes splashLogo { from { opacity: 0; transform: translateY(14px) scale(0.96); } }
-@keyframes splashLine { from { opacity: 0; transform: translateY(16px); } }
+@keyframes splashLogo {
+  from { opacity: 0; transform: translateY(12px) scale(0.88); filter: blur(7px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+@keyframes splashHalo {
+  0%, 100% { transform: scale(0.88); opacity: 0.45; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+@keyframes splashRing {
+  0% { transform: scale(0.8); opacity: 0; }
+  22% { opacity: 0.85; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+@keyframes splashLine {
+  from { opacity: 0; transform: translateY(110%); letter-spacing: 0.06em; }
+  to { opacity: 1; transform: none; letter-spacing: normal; }
+}
+@keyframes splashShine { from { background-position: 180% 0; } to { background-position: -80% 0; } }
 @keyframes splashOut {
-  0%, 74% { opacity: 1; visibility: visible; }
+  0%, 78% { opacity: 1; visibility: visible; }
   100% { opacity: 0; visibility: hidden; pointer-events: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .has-splash .splash { animation: splashOut 1.1s linear forwards; }
-  .splash__logo, .splash__line span { animation: none; }
+  .has-splash .splash { animation: splashOut 1.2s linear forwards; }
+  .splash__logo, .splash__l > i, .splash__mark::before, .splash__mark::after, .splash__line em { animation: none; }
+  .splash__mark::after { opacity: 0; }
 }
 
 .footer { background: var(--ink); color: rgba(255, 255, 255, 0.7); padding-top: clamp(64px, 8vw, 110px); overflow: hidden; }
