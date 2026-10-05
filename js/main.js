@@ -419,26 +419,49 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
       faq: 'Buying land, <em>answered</em>',
     },
   };
-  const grid = document.querySelector('.cprojects__grid');
-  const items = [...document.querySelectorAll('.cprojects__item')];
+  /*
+    The grid itself is now the shared listing engine from the projects page, so this
+    block only has to pick the category, hand it to that engine through the URL, and
+    swap the copy that names it. Filtering, search, sorting and paging are not
+    duplicated here.
+  */
+  const listingGrid = document.getElementById('projectGrid');
+  const filters = document.getElementById('filters');
+  const isCategoryPage = !!listingGrid && !!document.querySelector('.phero__crumbs [aria-current]') && !!document.querySelector('[data-cat]');
 
-  if (grid && items.length) {
-    const asked = (new URLSearchParams(location.search).get('type') || '').toLowerCase();
+  if (isCategoryPage) {
+    const params = new URLSearchParams(location.search);
+    const asked = (params.get('type') || '').toLowerCase();
     const type = TYPES[asked] ? asked : 'residential';
     const meta = TYPES[type];
     document.documentElement.setAttribute('data-cat', type);
 
-    // narrow to the category
-    const mine = items.filter((it) => it.dataset.type === type);
-    items.forEach((it) => { it.hidden = it.dataset.type !== type; });
+    // The listing engine reads the category straight off the URL, so put it there
+    // before that engine runs. It sits later in this file, so this always wins.
+    if (filters) filters.dataset.lockedType = type;
+    if (params.get('type') !== type) {
+      params.set('type', type);
+      try { history.replaceState(null, '', '?' + params.toString()); } catch (err) {}
+    }
 
-    const empty = document.querySelector('[data-cprojects-empty]');
-    if (empty) empty.hidden = mine.length > 0;
+    const cards = [...listingGrid.querySelectorAll('.pc')].filter((c) => c.dataset.type === type);
+
+    // Offer only the locations and statuses this category actually has, so a filter
+    // can never be chosen that returns an empty grid.
+    if (filters) {
+      filters.querySelectorAll('select[data-fill]').forEach((sel) => {
+        const key = sel.dataset.fill;
+        const seen = [...new Set(cards.map((c) => c.dataset[key]).filter(Boolean))].sort();
+        const keepFirst = sel.options[0];
+        sel.replaceChildren(keepFirst, ...seen.map((v) => Object.assign(document.createElement('option'), { value: v, textContent: v })));
+      });
+    }
 
     // page furniture that would otherwise contradict the grid
     document.title = meta.label + ' Properties in Noida & Ghaziabad | Investors Planet Realty';
     const crumb = document.querySelector('.phero__crumbs [aria-current]');
     if (crumb) crumb.textContent = meta.label;
+
     // headings that name the category; anything with real per-category facts behind it
     // (the three type tiles, the "why" reasons, the FAQ answers) stays as authored.
     document.querySelectorAll('[data-cat]').forEach((el) => {
@@ -459,18 +482,14 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
         el.innerHTML = copy;
       }
     });
+
     const secTitle = document.querySelector('.cprojects .section-title');
     if (secTitle) secTitle.innerHTML = meta.heading;
-    const more = document.querySelector('.cprojects a.btn-lux--ghost');
-    if (more) {
-      more.setAttribute('href', 'projects.html?type=' + type);
-      const icon = more.querySelector('.btn-icon');
-      more.textContent = 'See all ' + meta.plural;
-      if (icon) more.appendChild(icon);
-    }
+
     // Other-category tiles: drop the one you are already on, and any category with
     // nothing to show, so no tile ever leads to an empty page. Counts come from the grid.
-    const countOf = (t) => items.filter((it) => it.dataset.type === t).length;
+    const all = [...listingGrid.querySelectorAll('.pc')];
+    const countOf = (t) => all.filter((c) => c.dataset.type === t).length;
     document.querySelectorAll('.others__grid .ocard').forEach((a) => {
       const t = a.dataset.otype;
       const n = countOf(t);
@@ -478,50 +497,6 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
       const c = a.querySelector('[data-ocount]');
       if (c) c.textContent = String(n).padStart(2, '0') + (n === 1 ? ' Project' : ' Projects');
     });
-
-    // stats strip, derived from the visible cards only
-    const setStat = (label, value, sub) => {
-      const li = [...document.querySelectorAll('.cstat')].find((x) => {
-        const l = x.querySelector('.cstat__label');
-        return l && l.textContent.trim().toLowerCase() === label;
-      });
-      if (!li) return;
-      const v = li.querySelector('.cstat__value'); if (v) v.textContent = value;
-      const sb = li.querySelector('.cstat__sub'); if (sb && sub != null) sb.textContent = sub;
-    };
-    const cities = [...new Set(mine.map((it) => it.dataset.city))];
-    const priced = mine
-      .map((it) => { const p = it.querySelector('.pc__price'); if (!p) return ''; const s = p.querySelector('small'); return (s ? p.textContent.replace(s.textContent, '') : p.textContent).trim(); })
-      .filter((t) => t && !/^on request$/i.test(t));
-    setStat('projects listed', String(mine.length).padStart(2, '0'), 'Marketed by Investors Planet');
-    setStat('price range', priced.length ? 'From ' + priced[priced.length - 1].replace(/\*$/, '') : 'On request', priced.length ? 'Official developer pricing' : 'Share your budget and we will advise');
-    setStat('locations', cities.length ? cities.length + (cities.length === 1 ? ' City' : ' Cities') : '—', cities.join(' · ') || 'Tell us where you are looking');
-
-    // city chips, built from what survived the category filter
-    const bar = document.querySelector('[data-cities]');
-    if (bar) {
-      const counts = cities.map((c) => [c, mine.filter((it) => it.dataset.city === c).length]);
-      const chip = (city, label, n, active) => {
-        const b = document.createElement('button');
-        b.type = 'button';
-        b.className = 'cities__btn' + (active ? ' is-active' : '');
-        b.dataset.city = city;
-        b.append(label + ' ', Object.assign(document.createElement('span'), { textContent: String(n).padStart(2, '0') }));
-        return b;
-      };
-      bar.replaceChildren(chip('', 'All', mine.length, true), ...counts.map(([c, n]) => chip(c, c, n, false)));
-      bar.hidden = counts.length < 2;
-
-      bar.addEventListener('click', (e) => {
-        const b = e.target.closest('.cities__btn');
-        if (!b) return;
-        [...bar.children].forEach((x) => x.classList.toggle('is-active', x === b));
-        mine.forEach((it) => {
-          it.hidden = !!b.dataset.city && it.dataset.city !== b.dataset.city;
-          if (!it.hidden) it.animate([{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'none' }], { duration: 450, easing: 'ease-out' });
-        });
-      });
-    }
   }
 
   // "Talk to an expert" scrolls to the footer call-back form.
@@ -552,13 +527,19 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
   const listing = document.getElementById('listing');
 
   const field = (n) => form.elements.namedItem(n);
+  /*
+    The category pages reuse this engine with their type fixed by the page itself.
+    They mark the form, and that category then survives Reset and the no-match
+    "Clear filters" button, which would otherwise widen the grid to every project.
+  */
+  const lockedType = form.dataset.lockedType || '';
   const labels = { city: 'Location', status: 'Status', budget: 'Budget' };
 
   // ----- state <-> URL -----
   const read = () => {
     const u = new URLSearchParams(location.search);
     return {
-      type: u.get('type') || 'all',
+      type: lockedType || u.get('type') || 'all',
       q: u.get('q') || '',
       city: u.get('city') || '',
       status: u.get('status') || '',
@@ -572,6 +553,7 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
   const write = () => {
     const u = new URLSearchParams();
     if (state.type !== 'all') u.set('type', state.type);
+    if (lockedType) u.set('type', lockedType);
     ['q', 'city', 'status', 'budget', 'sort'].forEach((k) => state[k] && u.set(k, state[k]));
     if (state.page > 1) u.set('page', String(state.page));
     const qs = u.toString();
@@ -719,7 +701,7 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
     window.clearTimeout(t);
     t = window.setTimeout(() => update({ q: e.target.value.trim() }), 250);
   });
-  const reset = () => update({ type: 'all', q: '', city: '', status: '', budget: '', sort: '' });
+  const reset = () => update({ type: lockedType || 'all', q: '', city: '', status: '', budget: '', sort: '' });
   document.getElementById('resetFilters').addEventListener('click', reset);
   document.querySelector('[data-reset]').addEventListener('click', reset);
 

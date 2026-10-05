@@ -2457,6 +2457,12 @@ img { max-width: 100%; display: block; }
   gap: 18px;
 }
 .listing-filters > * { min-width: 0; }
+/*
+  On the projects page this bar lifts to overlap the hero. The category pages place
+  it under a section heading instead, so there it sits where it falls. The two-class
+  selector also beats the smaller lift set at the mobile breakpoint.
+*/
+.cprojects .listing-filters { margin-top: 0; }
 .filters__top { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
 
 .ftabs { display: flex; gap: 6px; padding: 5px; border-radius: 999px; background: var(--ivory); }
