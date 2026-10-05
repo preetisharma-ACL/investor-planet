@@ -3676,7 +3676,7 @@ img { max-width: 100%; display: block; }
   display: block;
   width: 34px;
   height: 2px;
-  margin: 14px 0 0;
+  margin: 13px 0 0;
   border-radius: 2px;
   background: var(--brand);
   transition: width 0.45s var(--ease), background 0.45s var(--ease);
@@ -3690,20 +3690,6 @@ img { max-width: 100%; display: block; }
   text-transform: uppercase;
   color: var(--brand-deep);
 }
-.tmember__cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  margin-top: 14px;
-  justify-self: start;
-  font-size: 13.5px;
-  font-weight: 600;
-  color: var(--ink);
-  transition: color 0.35s var(--ease), gap 0.35s var(--ease);
-}
-.tmember__cta svg { transition: transform 0.35s var(--ease); }
-.tmember__cta:hover { color: var(--brand-deep); gap: 11px; }
-.tmember__cta:hover svg { transform: translateX(2px); }
 
 
 @media (max-width: 1199.98px) {
@@ -3718,7 +3704,6 @@ img { max-width: 100%; display: block; }
   .tmember { flex-direction: column; text-align: center; gap: 16px; }
   .tmember__body { justify-items: center; }
   .tmember__name::after { margin-inline: auto; }
-  .tmember__cta { justify-self: center; }
   .tmember::after { right: 50%; transform: translateX(50%); bottom: -18px; }
   .tmember:hover::after { transform: translateX(50%) translateY(-4px); }
   .tmember__well img { width: 150px; height: 170px; }
