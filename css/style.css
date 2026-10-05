@@ -2790,7 +2790,15 @@ img { max-width: 100%; display: block; }
   .process__city { height: 130px; }
   .process { padding-bottom: 130px; }
   .process__bld { max-width: 60%; }
-  .cities { border-radius: 20px; }
+  /*
+    The white pill container only reads correctly while the chips fit one line.
+    Once they wrap it becomes an odd two-row blob, so on small screens drop the
+    container and let each chip stand on its own, flowing into as many rows as
+    it needs.
+  */
+  .cities { background: none; padding: 0; gap: 8px; border-radius: 0; width: 100%; }
+  .cities__btn { background: #fff; border: 1px solid rgba(14, 22, 32, 0.12); padding: 9px 14px; font-size: 13.5px; }
+  .cities__btn.is-active { background: var(--ink); border-color: var(--ink); color: #fff; }
 }
 
 
@@ -2984,9 +2992,19 @@ img { max-width: 100%; display: block; }
 /* amenities */
 .am-grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .am-grid li { display: grid; justify-items: center; gap: 12px; padding: 24px 10px; border-radius: 18px; background: var(--ivory); text-align: center; font-size: 13.5px; font-weight: 600; color: var(--ink); transition: background 0.4s var(--ease), color 0.4s, transform 0.4s var(--ease); }
-.am-grid__icon { color: var(--gold-deep); transition: color 0.4s, transform 0.4s var(--ease); }
+.am-grid__icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: #fff;
+  color: var(--gold-deep);
+  box-shadow: inset 0 0 0 1px rgba(14, 22, 32, 0.05);
+  transition: color 0.4s, background 0.4s, transform 0.4s var(--ease);
+}
 .am-grid li:hover { background: var(--ink); color: #fff; transform: translateY(-4px); }
-.am-grid li:hover .am-grid__icon { color: var(--gold); transform: scale(1.1); }
+.am-grid li:hover .am-grid__icon { color: var(--gold); background: rgba(255, 255, 255, 0.1); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16); transform: scale(1.06); }
 
 /* highlights */
 .hl-list { list-style: none; padding: 0; margin: 0 0 30px; display: grid; gap: 14px; }
@@ -3820,7 +3838,7 @@ img { max-width: 100%; display: block; }
 .bloglist__filter:hover { border-color: var(--brand-deep); }
 .bloglist__filter.is-active { background: var(--brand-deep); border-color: var(--brand-deep); color: #fff; }
 .bloglist__filter:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
-.bloglist__grid { list-style: none; }
+.bloglist__grid { list-style: none; margin: 0; padding: 0; }
 .bloglist__grid .blog-item { display: flex; }
 .bloglist__grid .bcard { width: 100%; }
 .bloglist__empty { margin: 28px 0 0; text-align: center; color: var(--muted); }

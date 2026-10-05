@@ -809,7 +809,7 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
       return !bad;
     };
 
-    form.querySelectorAll('input[name="name"], input[name="phone"], input[name="email"]').forEach((i) => {
+    form.querySelectorAll('input[name="name"], input[name="phone"], input[name="email"], input[name="city"]').forEach((i) => {
       i.addEventListener('blur', () => validate(i));
       i.addEventListener('input', () => i.closest('.is-invalid') && validate(i));
     });
@@ -822,7 +822,7 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const inputs = [...form.querySelectorAll('input[name="name"], input[name="phone"], input[name="email"]')];
+      const inputs = [...form.querySelectorAll('input[name="name"], input[name="phone"], input[name="email"], input[name="city"]')];
       const ok = inputs.map(validate).every(Boolean);
       const consent = form.querySelector('input[name="consent"]');
       if (!ok || !consent.checked) {
