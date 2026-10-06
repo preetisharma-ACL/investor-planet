@@ -78,7 +78,7 @@
           <form class="eform" id="contactForm" novalidate data-project="General enquiry"><input type="hidden" name="project" value="General enquiry"><input type="hidden" name="intent" value="General enquiry">
             <div class="eform__fields"><label class="eform__field"><span>Full name *</span><input type="text" name="name" autocomplete="name" placeholder="Your name" required minlength="2"><em class="eform__err">Please enter your name</em></label><label class="eform__field"><span>Phone *</span>
                 <div class="eform__phone"><b>+91</b><input type="tel" name="phone" autocomplete="tel-national" inputmode="numeric" placeholder="10-digit mobile" required pattern="[6-9][0-9]{9}" maxlength="10"></div><em class="eform__err">Enter a valid 10-digit mobile number</em>
-              </label><label class="eform__field"><span>Email</span><input type="email" name="email" autocomplete="email" placeholder="you@example.com"><em class="eform__err">Enter a valid email address</em></label><label class="eform__field"><span>I’m looking for</span><select name="config">
+              </label><label class="eform__field"><span>City</span><input type="text" name="city" list="contact-cities" autocomplete="address-level2" placeholder="Your city"><em class="eform__err">Please enter your city</em></label><datalist id="contact-cities"><option value="Noida"></option><option value="Greater Noida"></option><option value="Ghaziabad"></option><option value="Delhi"></option><option value="Gurugram"></option></datalist><label class="eform__field"><span>I’m looking for</span><select name="config">
                   <option>Buying a home</option>
                   <option>Commercial investment</option>
                   <option>Plots &amp; land</option>

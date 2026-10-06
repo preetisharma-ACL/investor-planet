@@ -392,27 +392,27 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
   */
   const TYPES = {
     residential: {
-      label: 'Residential', heading: 'Residential <em>projects</em>', plural: 'residential projects',
+      label: 'Residential', plural: 'residential projects',
       eyebrow: 'Homes for every chapter',
-      title: ['Luxury homes,', 'thoughtfully chosen'],
+      title: ['Residential <em>projects</em>'],
       lead: 'Whether you are buying your first home or your next one, our experienced team is here to help you every step of the way, from shortlisting to handover.',
       types: 'Find the right <em>residential fit</em>',
       whyEyebrow: 'Why residential', why: 'Reasons buyers <em>choose residential</em>',
       faq: 'Residential buying, <em>answered</em>',
     },
     commercial: {
-      label: 'Commercial', heading: 'Commercial <em>projects</em>', plural: 'commercial projects',
+      label: 'Commercial', plural: 'commercial projects',
       eyebrow: 'Offices, retail and dining',
-      title: ['Commercial space,', 'chosen for returns'],
+      title: ['Commercial <em>projects</em>'],
       lead: 'Retail frontage, Grade-A offices and food courts from developers we market directly. We walk you through the numbers before you commit.',
       types: 'Find the right <em>commercial fit</em>',
       whyEyebrow: 'Why commercial', why: 'Reasons investors <em>choose commercial</em>',
       faq: 'Commercial buying, <em>answered</em>',
     },
     plots: {
-      label: 'Plots', heading: 'Plots &amp; <em>land</em>', plural: 'plots',
+      label: 'Plots', plural: 'plots',
       eyebrow: 'Build it your way',
-      title: ['Land to build on,', 'checked end to end'],
+      title: ['Plots &amp; <em>land</em>'],
       lead: 'Tell us the corridor and the budget you have in mind and we will bring you plots with the approvals and title already verified.',
       types: 'Find the right <em>plot</em>',
       whyEyebrow: 'Why plots', why: 'Reasons buyers <em>choose plots</em>',
@@ -474,17 +474,20 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
           tween animating detached nodes while the fresh ones stay parked below
           their clipped line box, so only the text inside them is swapped.
         */
+        /*
+          Write into each line, never over it. The intro tween holds a reference to
+          these very spans, so replacing them would leave it animating detached nodes
+          while the fresh ones stay parked below their clipped line box. Setting their
+          contents keeps the elements the tween is driving.
+        */
         el.querySelectorAll('.line > span').forEach((span, i) => {
           if (copy[i] == null) return;
-          (span.querySelector('em') || span).textContent = copy[i];
+          span.innerHTML = copy[i];
         });
       } else {
         el.innerHTML = copy;
       }
     });
-
-    const secTitle = document.querySelector('.cprojects .section-title');
-    if (secTitle) secTitle.innerHTML = meta.heading;
 
     // Other-category tiles: drop the one you are already on, and any category with
     // nothing to show, so no tile ever leads to an empty page. Counts come from the grid.
