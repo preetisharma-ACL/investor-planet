@@ -75,8 +75,16 @@ img { max-width: 100%; display: block; }
   and the whole page could be dragged sideways. Cap the gutter at phone width
   so the row's negative margin never exceeds the padding it sits in.
 */
-@media (max-width: 575.98px) {
+/*
+  The container's inline padding is clamp(16px, 3vw, 28px), so it only reaches
+  Bootstrap's 24px g-5 pull once the viewport passes 800px. Below that the row
+  leaked past the edge and the page could be dragged sideways. Cap the gutter for
+  the whole range where the padding is too small, not just on phones.
+*/
+@media (max-width: 799.98px) {
   .row.g-5, .row.gx-5 { --bs-gutter-x: 2rem; }
+}
+@media (max-width: 575.98px) {
 }
 
 .section { padding-block: clamp(40px, 5vw, 72px); position: relative; }
@@ -199,6 +207,9 @@ img { max-width: 100%; display: block; }
   transition: transform 0.5s var(--ease), background 0.5s var(--ease);
 }
 .btn-lux:hover .btn-icon { transform: rotate(45deg); background: var(--gold); color: var(--ink); }
+/* arrow glyph size */
+.btn-lux .btn-icon svg { width: 21px; height: 21px; }
+.pc__btn svg, .pcard__btn svg, .bcard__btn svg { width: 24px; height: 24px; }
 
 .btn-lux--ghost {
   background: transparent;
@@ -926,8 +937,8 @@ img { max-width: 100%; display: block; }
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 70% 55% at 50% 45%, rgba(14, 22, 32, 0.68), transparent 70%),
-    linear-gradient(180deg, rgba(14, 22, 32, 0.82) 0%, rgba(14, 22, 32, 0.44) 35%, rgba(14, 22, 32, 0.52) 65%, rgba(14, 22, 32, 0.95) 100%);
+    radial-gradient(ellipse 70% 55% at 50% 45%, rgba(14, 22, 32, 0.38), transparent 72%),
+    linear-gradient(180deg, rgba(14, 22, 32, 0.58) 0%, rgba(14, 22, 32, 0.12) 35%, rgba(14, 22, 32, 0.2) 65%, rgba(14, 22, 32, 0.82) 100%);
 }
 .hero__content {
   position: relative;
@@ -975,6 +986,10 @@ img { max-width: 100%; display: block; }
   color: transparent;
   -webkit-text-fill-color: transparent;
 }
+/* hero text legibility: carried by the glyphs, not by dimming the photo */
+.hero__brand, .hero__title { filter: drop-shadow(0 2px 10px rgba(14, 22, 32, 0.7)); }
+.hero__eyebrow, .hero__lead { text-shadow: 0 1px 10px rgba(14, 22, 32, 0.75); }
+
 .hero__lead {
   max-width: 640px;
   font-size: clamp(15px, 1.2vw, 17px);
@@ -1438,8 +1453,9 @@ img { max-width: 100%; display: block; }
   .why__badge { left: 16px; }
 }
 @media (max-width: 575.98px) {
-  .stat { padding: 28px 14px 0; }
-  .stat:nth-child(odd) { padding-left: 0; }
+  .stat { padding: 24px 10px 0; text-align: center; }
+  .stat__num { font-size: 27px; white-space: nowrap; }
+  .stat__label { margin-top: 8px; font-size: 13px; line-height: 1.4; }
   .why__badge { padding: 16px 18px; }
   .why__badge-num { font-size: 44px; }
 }
@@ -2786,6 +2802,16 @@ img { max-width: 100%; display: block; }
   .cities { background: none; padding: 0; gap: 8px; border-radius: 0; width: 100%; }
   .cities__btn.is-active { background: var(--ink); border-color: var(--ink); color: #fff; }
 }
+
+/* banner centred on phones */
+@media (max-width: 575.98px) {
+  .phero__inner { text-align: center; }
+  .phero__crumbs { margin-inline: auto; }
+  .phero .eyebrow { justify-content: center; }
+  .phero__title, .phero__text { margin-inline: auto; }
+  .phero__title .line { justify-content: center; }
+}
+
 
 /* ==========================================================================
    Enquiry form
