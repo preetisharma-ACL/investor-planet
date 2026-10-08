@@ -706,16 +706,6 @@ img { max-width: 100%; display: block; }
   width: clamp(152px, 17.5vw, 206px);
   aspect-ratio: 1;
 }
-/* a soft brand wash that breathes behind the logo */
-.splash__mark::before {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  inset: -12%;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(106, 151, 204, 0.26), transparent 66%);
-  animation: splashHalo 2.6s var(--ease) 0.2s infinite;
-}
 /* a ring that pushes outwards and dissolves, twice over the hold */
 .splash__mark::after {
   content: '';
@@ -733,11 +723,23 @@ img { max-width: 100%; display: block; }
   animation: splashLogo 0.95s var(--ease) both;
 }
 
+/* ----- the brand name, sitting just above the headline ----- */
+.splash__brand {
+  margin: 0 0 calc(clamp(20px, 2.6vw, 30px) * -0.55);
+  font-family: var(--font-head);
+  font-size: clamp(17px, 2vw, 23px);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #20409a; /* the royal blue of the wordmark in the logo */
+  animation: splashBrand 0.8s var(--ease) 0.2s both;
+}
+
 /* ----- the headline ----- */
 .splash__line {
   margin: 0;
   font-family: var(--font-head);
-  font-size: clamp(20px, 2.8vw, 30px);
+  font-size: clamp(17px, 2.2vw, 24px);
   line-height: 1.22;
   font-weight: 400;
   color: var(--ink);
@@ -765,10 +767,6 @@ img { max-width: 100%; display: block; }
   from { opacity: 0; transform: translateY(12px) scale(0.88); filter: blur(7px); }
   to { opacity: 1; transform: none; filter: blur(0); }
 }
-@keyframes splashHalo {
-  0%, 100% { transform: scale(0.88); opacity: 0.45; }
-  50% { transform: scale(1.05); opacity: 1; }
-}
 @keyframes splashRing {
   0% { transform: scale(0.8); opacity: 0; }
   22% { opacity: 0.85; }
@@ -778,6 +776,10 @@ img { max-width: 100%; display: block; }
   from { opacity: 0; transform: translateY(110%); letter-spacing: 0.06em; }
   to { opacity: 1; transform: none; letter-spacing: normal; }
 }
+@keyframes splashBrand {
+  from { opacity: 0; transform: translateY(8px); letter-spacing: 0.3em; }
+  to { opacity: 1; transform: none; letter-spacing: 0.16em; }
+}
 @keyframes splashShine { from { background-position: 180% 0; } to { background-position: -80% 0; } }
 @keyframes splashOut {
   0%, 78% { opacity: 1; visibility: visible; }
@@ -786,7 +788,7 @@ img { max-width: 100%; display: block; }
 
 @media (prefers-reduced-motion: reduce) {
   .has-splash .splash { animation: splashOut 1.2s linear forwards; }
-  .splash__logo, .splash__l > i, .splash__mark::before, .splash__mark::after, .splash__line em { animation: none; }
+  .splash__logo, .splash__brand, .splash__l > i, .splash__mark::after, .splash__line em { animation: none; }
   .splash__mark::after { opacity: 0; }
 }
 
