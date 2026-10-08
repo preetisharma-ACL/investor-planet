@@ -822,6 +822,66 @@ img { max-width: 100%; display: block; }
   .splash__mark::after { opacity: 0; }
 }
 
+
+/* ==========================================================================
+   Select menu
+   A native select's open list is drawn by the operating system and cannot be
+   styled, so each one is paired with this panel. The <select> itself stays in
+   the DOM and remains the source of truth for its value and for form submission;
+   this only replaces the list the browser would have drawn.
+   ========================================================================== */
+.selx { position: relative; }
+/* the native control stays for forms and for scripts that read it, but is never shown */
+.selx > select { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+
+.selx__panel {
+  /* parked on <body>: the hero and several cards clip their overflow, which would
+     cut the menu off. Positioned in viewport space from the field's own rect. */
+  position: fixed;
+  z-index: 9998;
+  max-height: 232px;
+  overflow-y: auto;
+  padding: 4px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid rgba(14, 22, 32, 0.08);
+  box-shadow: 0 16px 36px -20px rgba(14, 22, 32, 0.4), 0 2px 6px rgba(14, 22, 32, 0.05);
+  display: none;
+}
+.selx__panel.is-open { display: block; animation: selxIn 0.18s var(--ease) both; }
+
+.selx__opt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  padding: 7px 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  font: inherit;
+  font-size: 13.5px;
+  line-height: 1.25;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.18s var(--ease), color 0.18s var(--ease);
+}
+.selx__opt + .selx__opt { margin-top: 1px; }
+.selx__opt:hover, .selx__opt.is-cursor { background: var(--ivory); }
+.selx__opt[aria-selected='true'] { background: var(--brand-deep); color: #fff; }
+.selx__opt[aria-selected='true']:hover { background: var(--brand-deep); }
+/* the tick only shows on the chosen row, and holds its space so nothing shifts */
+.selx__opt svg { flex-shrink: 0; opacity: 0; }
+.selx__opt[aria-selected='true'] svg { opacity: 1; }
+
+.selx__panel::-webkit-scrollbar { width: 8px; }
+.selx__panel::-webkit-scrollbar-thumb { background: rgba(14, 22, 32, 0.18); border-radius: 99px; border: 2px solid #fff; }
+
+@keyframes selxIn { from { opacity: 0; transform: translateY(-6px); } }
+@media (prefers-reduced-motion: reduce) { .selx__panel.is-open { animation: none; } }
+
 .footer { background: var(--ink); color: rgba(255, 255, 255, 0.7); padding-top: clamp(64px, 8vw, 110px); overflow: hidden; }
 .footer__about { margin: 22px 0 26px; line-height: 1.7; max-width: 360px; }
 .footer__social { display: flex; gap: 10px; }
@@ -1060,6 +1120,18 @@ img { max-width: 100%; display: block; }
   text-transform: uppercase;
   color: var(--gold-deep);
 }
+.search__select { accent-color: var(--brand-deep); }
+
+/* dropdown list */
+.search__select option {
+  background: #ffffff;
+  color: var(--ink);
+  font-size: 15px;
+  padding: 10px 12px;
+}
+.search__select option:checked,
+.search__select option:hover { background: var(--brand-deep); color: #ffffff; }
+.search__select option:disabled { color: var(--muted); }
 .search__select {
   appearance: none;
   border: 0;

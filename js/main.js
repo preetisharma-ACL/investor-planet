@@ -574,6 +574,7 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
       el.value = state[k];
       const wrap = el.closest('.fsel');
       if (wrap) wrap.classList.toggle('is-set', !!state[k] && k !== 'sort');
+      el.dispatchEvent(new CustomEvent('ipr:sync'));
     });
   };
 
@@ -1045,4 +1046,185 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
   el.addEventListener('animationend', (e) => { if (e.animationName === 'splashOut') drop(); });
   // belt and braces: if the animation never reports, clear it anyway
   window.setTimeout(drop, 4000);
+})();
+
+/* ==========================================================================
+   Select menu
+   Pairs every <select> with a styled list, because the one the browser draws is
+   an operating-system window that CSS cannot reach. The <select> stays in the DOM
+   and keeps owning its value, so forms submit as before and any script reading or
+   writing .value carries on working untouched.
+   ========================================================================== */
+(function () {
+  const TICK = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
+  let open = null;
+  let uid = 0;
+
+  document.querySelectorAll('select').forEach((select) => {
+    if (select.multiple || select.closest('.selx')) return;
+
+    const host = select.parentElement;
+    host.classList.add('selx');
+    if (getComputedStyle(host).position === 'static') host.style.position = 'relative';
+
+    // the visible control: a copy of whatever the page already styled the select as
+    const face = document.createElement('div');
+    face.className = select.className;
+    face.tabIndex = 0;
+    face.setAttribute('role', 'combobox');
+    face.setAttribute('aria-haspopup', 'listbox');
+    face.setAttribute('aria-expanded', 'false');
+    const label = select.closest('label');
+    const name = label && label.querySelector('span');
+    if (name) face.setAttribute('aria-label', name.textContent.trim());
+    else if (select.name) face.setAttribute('aria-label', select.name);
+
+    const panel = document.createElement('div');
+    panel.className = 'selx__panel';
+    panel.setAttribute('role', 'listbox');
+    // the panel sits on <body>, so the pairing has to be stated rather than implied by nesting
+    panel.id = 'selx-menu-' + ++uid;
+    face.setAttribute('aria-controls', panel.id);
+
+    select.setAttribute('tabindex', '-1');
+    select.setAttribute('aria-hidden', 'true');
+    select.insertAdjacentElement('afterend', face);
+    document.body.appendChild(panel);
+
+    let rows = [];
+    const build = () => {
+      panel.replaceChildren();
+      rows = [...select.options].map((o, i) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'selx__opt';
+        b.setAttribute('role', 'option');
+        b.dataset.i = String(i);
+        b.innerHTML = '<span></span>' + TICK;
+        b.firstChild.textContent = o.textContent;
+        b.addEventListener('click', () => { choose(i); });
+        panel.appendChild(b);
+        return b;
+      });
+      paint();
+    };
+
+    const paint = () => {
+      const chosen = select.selectedIndex;
+      face.textContent = chosen > -1 ? select.options[chosen].textContent : '';
+      rows.forEach((b, i) => b.setAttribute('aria-selected', String(i === chosen)));
+    };
+
+    const choose = (i) => {
+      select.selectedIndex = i;
+      paint();
+      close();
+      face.focus();
+      select.dispatchEvent(new Event('change', { bubbles: true }));
+    };
+
+    let cursor = -1;
+    const moveCursor = (i) => {
+      rows.forEach((b) => b.classList.remove('is-cursor'));
+      cursor = Math.max(0, Math.min(rows.length - 1, i));
+      const row = rows[cursor];
+      if (!row) return;
+      row.classList.add('is-cursor');
+      row.scrollIntoView({ block: 'nearest' });
+    };
+
+    const place = () => {
+      /* A modal <dialog> paints in the top layer, above every z-index, so a menu
+         belonging to a field inside one has to live in that dialog to be seen. */
+      const parent = face.closest('dialog') || document.body;
+      if (panel.parentElement !== parent) parent.appendChild(panel);
+
+      const r = face.getBoundingClientRect();
+      const w = Math.max(r.width + 16, 180);
+      panel.style.width = w + 'px';
+      panel.style.maxHeight = '';
+      const h = panel.offsetHeight;
+      // open upwards when the room below is too tight and there is more of it above
+      const below = window.innerHeight - r.bottom - 8;
+      const up = below < h && r.top - 8 > below;
+      if (up && r.top - 14 < h) panel.style.maxHeight = Math.max(120, Math.round(r.top - 14)) + 'px';
+
+      const left = Math.round(Math.min(Math.max(8, r.left - 8), window.innerWidth - w - 8));
+      const top = Math.round(up ? Math.max(8, r.top - 6 - panel.offsetHeight) : r.bottom + 6);
+      panel.style.left = left + 'px';
+      panel.style.top = top + 'px';
+
+      /* A fixed box inside a transformed ancestor — a dialog part-way through its
+         open animation — is positioned against that ancestor, not the viewport.
+         Rather than special-casing it, correct by whatever was actually laid out. */
+      const got = panel.getBoundingClientRect();
+      const dx = left - got.left;
+      const dy = top - got.top;
+      if (Math.abs(dx) > 0.5 || Math.abs(dy) > 0.5) {
+        panel.style.left = left + dx + 'px';
+        panel.style.top = top + dy + 'px';
+      }
+    };
+
+    const close = () => {
+      panel.classList.remove('is-open');
+      host.classList.remove('is-open');
+      face.setAttribute('aria-expanded', 'false');
+      rows.forEach((b) => b.classList.remove('is-cursor'));
+      if (open === host) open = null;
+    };
+
+    const show = () => {
+      if (open && open !== host) open.querySelector('[role="combobox"]').dispatchEvent(new Event('selx:close'));
+      host.classList.add('is-open');
+      panel.classList.add('is-open');
+      face.setAttribute('aria-expanded', 'true');
+      place();
+      open = host;
+      moveCursor(Math.max(0, select.selectedIndex));
+    };
+
+    face.addEventListener('selx:close', close);
+    face.addEventListener('click', () => (host.classList.contains('is-open') ? close() : show()));
+    face.addEventListener('keydown', (e) => {
+      const isOpen = host.classList.contains('is-open');
+      if (e.key === 'Escape') { close(); return; }
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        isOpen ? choose(cursor) : show();
+        return;
+      }
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (!isOpen) { show(); return; }
+        moveCursor(cursor + (e.key === 'ArrowDown' ? 1 : -1));
+        return;
+      }
+      if (isOpen && (e.key === 'Home' || e.key === 'End')) { e.preventDefault(); moveCursor(e.key === 'Home' ? 0 : rows.length - 1); return; }
+      // type a letter to jump, the way a native select behaves
+      if (e.key.length === 1 && /\S/.test(e.key)) {
+        const from = (isOpen ? cursor : select.selectedIndex) + 1;
+        const all = [...select.options].map((o) => o.textContent.trim().toLowerCase());
+        const k = e.key.toLowerCase();
+        for (let n = 0; n < all.length; n++) {
+          const i = (from + n) % all.length;
+          if (all[i].startsWith(k)) { isOpen ? moveCursor(i) : choose(i); break; }
+        }
+      }
+    });
+
+    // the engine rewrites options on the category pages and resets values on Reset
+    select.addEventListener('ipr:sync', () => { if (rows.length !== select.options.length) build(); else paint(); });
+    select.addEventListener('change', paint);
+
+    build();
+  });
+
+  document.addEventListener('click', (e) => {
+    if (open && !e.target.closest('.selx, .selx__panel')) open.querySelector('[role="combobox"]').dispatchEvent(new Event('selx:close'));
+  });
+  const shut = () => { if (open) open.querySelector('[role="combobox"]').dispatchEvent(new Event('selx:close')); };
+  window.addEventListener('resize', shut);
+  document.addEventListener('scroll', shut, { passive: true, capture: true });
+  if (window.__lenis) window.__lenis.on('scroll', shut);
 })();
