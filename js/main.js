@@ -48,8 +48,15 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
       e.preventDefault();
       // Let Bootstrap close the offcanvas first so Lenis isn't locked.
       // Leave room for a sticky section bar if the page has one (project pages).
+      // The bar steps down under the main navbar when that is showing, so its
+      // underside is push + height, not height alone. Reserve the stepped-down
+      // amount either way: landing a little low is fine, landing under it is not.
       const tabs = document.getElementById('sectionTabs');
-      const offset = url.hash === '#home' ? 0 : -((tabs ? tabs.offsetHeight : 0) + 20);
+      let offset = 0;
+      if (url.hash !== '#home') {
+        const push = tabs ? parseFloat(getComputedStyle(tabs).getPropertyValue('--stabs-push')) || 0 : 0;
+        offset = -((tabs ? tabs.offsetHeight : 0) + push + 20);
+      }
       setTimeout(() => lenis.scrollTo(target, { offset }), 10);
     });
   });
@@ -872,8 +879,29 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
   const sentinel = document.createElement('div');
   bar.before(sentinel);
   new IntersectionObserver(([e]) => bar.classList.toggle('is-stuck', !e.isIntersecting)).observe(sentinel);
+  // How much vertical room the sticky chrome occupies right now: the bar itself,
+  // plus the step-down when the main navbar is also on screen. The sticky side card
+  // reads this, so it can never end up tucked underneath either bar.
+  const publishSpace = () => {
+    /* Step the bar down by the navbar's real height rather than a guessed constant.
+       The old 80px was shorter than the navbar, so the bar slid underneath it and
+       the price and Enquire button came to rest against its edge. The navbar's
+       height changes with breakpoint and scroll state, so it is measured, not assumed. */
+    if (header) bar.style.setProperty('--stabs-push', header.offsetHeight + 'px');
+    const push = parseFloat(getComputedStyle(bar).getPropertyValue('--stabs-push')) || 0;
+    const stepped = bar.classList.contains('is-pushed') ? push : 0;
+    document.documentElement.style.setProperty('--stabs-space', bar.offsetHeight + stepped + 'px');
+  };
+  publishSpace();
+  window.addEventListener('resize', publishSpace);
+  // the navbar shrinks over half a second as it scrolls, so follow its real height
+  // rather than whatever it happened to measure the instant the class changed
+  if (header && window.ResizeObserver) new ResizeObserver(publishSpace).observe(header);
   if (header) {
-    const sync = () => bar.classList.toggle('is-pushed', header.classList.contains('is-scrolled') && !header.classList.contains('is-hidden'));
+    const sync = () => {
+      bar.classList.toggle('is-pushed', header.classList.contains('is-scrolled') && !header.classList.contains('is-hidden'));
+      publishSpace();
+    };
     new MutationObserver(sync).observe(header, { attributes: true, attributeFilter: ['class'] });
   }
 })();
