@@ -1097,7 +1097,8 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
 
     // the visible control: a copy of whatever the page already styled the select as
     const face = document.createElement('div');
-    face.className = select.className;
+    // the select's own classes, plus a hook the element-selector rules can target
+    face.className = (select.className + ' selx__face').trim();
     face.tabIndex = 0;
     face.setAttribute('role', 'combobox');
     face.setAttribute('aria-haspopup', 'listbox');
@@ -1255,4 +1256,26 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
   window.addEventListener('resize', shut);
   document.addEventListener('scroll', shut, { passive: true, capture: true });
   if (window.__lenis) window.__lenis.on('scroll', shut);
+})();
+
+/* ==========================================================================
+   Developer monogram
+   The avatar beside the developer name is initials, not a logo. Deriving them
+   from the name means the backend only has to fill in the name itself, and the
+   two can never disagree the way a hard-coded pair would.
+   ========================================================================== */
+(function () {
+  document.querySelectorAll('[data-initials]').forEach((badge) => {
+    const name = badge.parentElement.querySelector('.dev__name');
+    if (!name) return;
+    const initials = name.textContent
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((w) => w[0])
+      .join('')
+      .toUpperCase();
+    if (initials) badge.textContent = initials;
+  });
 })();

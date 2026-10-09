@@ -19,6 +19,9 @@
   --gold: var(--brand);
   --gold-2: var(--brand-light);
   --gold-deep: var(--brand-deep);
+  /* dropdown chevron. A stand-in element gets no native arrow, so the forms that
+     relied on the browser's own have to draw it. */
+  --chev: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%230e1620' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
   --ivory: #f8f5ef;
   --sand: #efe8dc;
   --line: rgba(14, 22, 32, 0.1);
@@ -602,7 +605,8 @@ img { max-width: 100%; display: block; }
   backdrop-filter: blur(14px);
 }
 .cta__form input,
-.cta__form select {
+.cta__form select,
+.cta__form .selx__face {
   height: 56px;
   border-radius: 14px;
   border: 1px solid transparent;
@@ -613,9 +617,9 @@ img { max-width: 100%; display: block; }
   outline: none;
   transition: border-color 0.3s;
 }
-.cta__form input:focus, .cta__form select:focus { border-color: var(--gold); }
+.cta__form input:focus, .cta__form select:focus, .cta__form .selx__face:focus { border-color: var(--gold); }
 /* Row 1 name + phone, row 2 interest + city, then the button across the full width. */
-.cta__form select { appearance: none; -webkit-appearance: none; padding-right: 40px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%230e1620' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; }
+.cta__form select, .cta__form .selx__face { appearance: none; -webkit-appearance: none; padding-right: 40px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%230e1620' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; }
 .cta__submit {
   grid-column: 1 / -1;
   height: 58px;
@@ -831,6 +835,9 @@ img { max-width: 100%; display: block; }
    this only replaces the list the browser would have drawn.
    ========================================================================== */
 .selx { position: relative; }
+/* The stand-in is a <div>, so it has to be told to centre its label vertically
+   and to look clickable; a real select does both by itself. */
+.selx__face { display: flex; align-items: center; cursor: pointer; }
 /* the native control stays for forms and for scripts that read it, but is never shown */
 .selx > select { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 
@@ -2531,9 +2538,9 @@ img { max-width: 100%; display: block; }
 .aform__f { display: grid; gap: 6px; margin: 0; min-width: 0; }
 .aform__f--full { grid-column: 1 / -1; }
 .aform__f > span:first-child { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
-.aform input:not([type='file']), .aform select, .aform textarea { width: 100%; height: 50px; padding: 0 16px; border-radius: 14px; border: 1px solid var(--line); background: var(--ivory); font-size: 15px; color: var(--ink); outline: none; transition: border-color 0.3s; }
+.aform input:not([type='file']), .aform select, .aform textarea, .aform .selx__face { width: 100%; height: 50px; padding: 0 16px; border-radius: 14px; border: 1px solid var(--line); background: var(--ivory); font-size: 15px; color: var(--ink); outline: none; transition: border-color 0.3s; }
 .aform textarea { height: auto; padding: 14px 16px; resize: vertical; }
-.aform input:focus, .aform select:focus, .aform textarea:focus { border-color: var(--gold); }
+.aform input:focus, .aform select:focus, .aform textarea:focus, .aform .selx__face:focus { border-color: var(--gold); }
 .aform__f em { display: none; font-style: normal; font-size: 12px; color: #d9534f; }
 .aform__f.is-invalid em { display: block; }
 .aform__f.is-invalid input, .aform__f.is-invalid .aform__drop { border-color: #d9534f; }
@@ -2716,7 +2723,7 @@ img { max-width: 100%; display: block; }
 .fsel:focus-within, .fsel:hover { border-color: rgba(106, 151, 204, 0.5); background: #fff; }
 .fsel.is-set { border-color: var(--gold); background: #fffaf1; }
 .fsel span { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-deep); }
-.fsel select {
+.fsel select, .fsel .selx__face {
   appearance: none;
   border: 0;
   outline: none;
@@ -2881,7 +2888,7 @@ img { max-width: 100%; display: block; }
 /* banner centred on phones */
 @media (max-width: 575.98px) {
   .phero__inner { text-align: center; }
-  .phero__crumbs { margin-inline: auto; }
+  .phero__crumbs { margin-inline: auto; justify-content: center; }
   .phero .eyebrow { justify-content: center; }
   .phero__title, .phero__text { margin-inline: auto; }
   .phero__title .line { justify-content: center; }
@@ -2898,7 +2905,7 @@ img { max-width: 100%; display: block; }
 .eform__field { display: grid; gap: 6px; margin: 0; min-width: 0; border: 0; padding: 0; }
 .eform__field--full { grid-column: 1 / -1; }
 .eform__field > span, .eform__pref legend { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted-c); float: none; margin: 0; padding: 0; }
-.eform input[type='text'], .eform input[type='email'], .eform input[type='tel'], .eform select, .eform textarea {
+.eform input[type='text'], .eform input[type='email'], .eform input[type='tel'], .eform select, .eform textarea, .eform .selx__face {
   width: 100%;
   height: 52px;
   padding: 0 16px;
@@ -2913,7 +2920,8 @@ img { max-width: 100%; display: block; }
 .eform textarea { height: auto; padding: 14px 16px; resize: vertical; }
 .eform select option { color: var(--ink); }
 .eform input::placeholder, .eform textarea::placeholder { color: var(--muted-c); opacity: 0.8; }
-.eform input:focus, .eform select:focus, .eform textarea:focus { border-color: var(--gold); }
+.eform input:focus, .eform select:focus, .eform textarea:focus, .eform .selx__face:focus { border-color: var(--gold); }
+.eform .selx__face, .aform .selx__face { padding-right: 40px; background-image: var(--chev); background-repeat: no-repeat; background-position: right 16px center; }
 .eform__phone { display: flex; align-items: stretch; }
 .eform__phone b { display: grid; place-items: center; padding: 0 14px; border-radius: 14px 0 0 14px; border: 1px solid var(--line-c); border-right: 0; background: var(--bg); color: var(--fg); font-weight: 600; font-size: 14px; }
 .eform__phone input { border-radius: 0 14px 14px 0 !important; }
@@ -3291,7 +3299,7 @@ img { max-width: 100%; display: block; }
   .emodal .eform__fields { gap: 10px; }
   .emodal .eform__field { gap: 4px; }
   .emodal .eform__field > span, .emodal .eform__pref legend { font-size: 11px; }
-  .emodal .eform input[type='text'], .emodal .eform input[type='tel'], .emodal .eform input[type='email'], .emodal .eform select { height: 46px; }
+  .emodal .eform input[type='text'], .emodal .eform input[type='tel'], .emodal .eform input[type='email'], .emodal .eform select, .emodal .eform .selx__face { height: 46px; }
   .emodal .eform__chip span { padding: 7px 14px; font-size: 13px; }
   .emodal .eform__pref { gap: 6px; }
   .emodal .eform__consent { margin: 12px 0; font-size: 12px; }
