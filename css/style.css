@@ -21,6 +21,8 @@
   --gold-deep: var(--brand-deep);
   /* dropdown chevron. A stand-in element gets no native arrow, so the forms that
      relied on the browser's own have to draw it. */
+  /* a paler step again than --brand-light, for accent words set over a photograph */
+  --brand-pale: #cfe1f5;
   --chev: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%230e1620' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
   --ivory: #f8f5ef;
   --sand: #efe8dc;
@@ -152,6 +154,9 @@ img { max-width: 100%; display: block; }
   }
   .section--dark .section-title em {
     background-image: linear-gradient(100deg, var(--brand) 0%, var(--brand-light) 28%, #eaf3fd 52%, var(--brand-light) 74%, var(--brand) 100%);
+  }
+  .cta__box .section-title em {
+    background-image: linear-gradient(100deg, var(--brand-light) 0%, #dceafa 26%, #ffffff 52%, #dceafa 74%, var(--brand-light) 100%);
   }
 }
 
@@ -590,9 +595,20 @@ img { max-width: 100%; display: block; }
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(100deg, rgba(14, 22, 32, 0.92) 10%, rgba(14, 22, 32, 0.55) 60%, rgba(14, 22, 32, 0.35));
+  background: linear-gradient(
+    100deg,
+    rgba(14, 22, 32, 0.95) 8%,
+    rgba(14, 22, 32, 0.89) 46%,
+    rgba(14, 22, 32, 0.62) 70%,
+    rgba(14, 22, 32, 0.4) 100%
+  );
 }
-.text-gold { color: var(--gold) !important; }
+/* the accent half of the CTA headline, over a dark photograph: the mid-tone brand
+   blue reads as grey there, so the light tint carries it instead */
+.text-gold { color: var(--brand-pale) !important; }
+/* drop-shadow, not text-shadow: the accent is a gradient clipped to the glyphs,
+   and text-shadow would paint a slab behind the transparent fill */
+.cta__box .section-title { filter: drop-shadow(0 2px 14px rgba(14, 22, 32, 0.85)); }
 .cta__lead { color: rgba(255, 255, 255, 0.75); font-size: 16px; margin: 18px 0 0; max-width: 440px; }
 .cta__form {
   display: grid;
@@ -1244,7 +1260,15 @@ img { max-width: 100%; display: block; }
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(180deg, rgba(14, 22, 32, 0.35) 0%, rgba(14, 22, 32, 0) 35%, rgba(14, 22, 32, 0.88) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(14, 22, 32, 0.4) 0%,
+    rgba(14, 22, 32, 0.06) 26%,
+    rgba(14, 22, 32, 0.32) 48%,
+    rgba(14, 22, 32, 0.64) 66%,
+    rgba(14, 22, 32, 0.86) 82%,
+    rgba(14, 22, 32, 0.96) 100%
+  );
 }
 .offer__top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
 .offer__no {
@@ -1303,6 +1327,18 @@ img { max-width: 100%; display: block; }
 
 @media (max-width: 991.98px) {
   .offer-panels { flex-direction: column; height: auto; }
+  /* stacked cards show their whole body, so the smoke has to start higher up */
+  .offer__shade {
+    background: linear-gradient(
+      180deg,
+      rgba(14, 22, 32, 0.46) 0%,
+      rgba(14, 22, 32, 0.3) 20%,
+      rgba(14, 22, 32, 0.66) 38%,
+      rgba(14, 22, 32, 0.76) 56%,
+      rgba(14, 22, 32, 0.88) 76%,
+      rgba(14, 22, 32, 0.94) 100%
+    );
+  }
   .offer, .offer.is-open { flex: none; min-height: 340px; }
   .offer__more { grid-template-rows: 1fr; opacity: 1; }
   .offer .offer__img { transform: none; }
