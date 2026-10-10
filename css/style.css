@@ -1710,20 +1710,46 @@ img { max-width: 100%; display: block; }
   pointer-events: none;
   background: radial-gradient(95% 62% at 4% -14%, rgba(255, 255, 255, 0.62), transparent 46%);
 }
-/* In place of the usual diagonal shine: brand colour seeps up from the card's
-   base. It sits behind the text (which holds z-index 1) so nothing is washed out. */
-.bcard::after {
-  content: '';
-  position: absolute;
-  inset: auto 0 0 0;
-  height: 45%;
-  z-index: 0;
-  pointer-events: none;
-  background: linear-gradient(180deg, transparent, rgba(106, 151, 204, 0.18));
-  opacity: 0;
-  transition: opacity 0.5s var(--ease);
+/* the edge light: a conic gradient spun behind the card, masked to a hairline
+   ring so only the outline carries it. The movement the old sweep had, without
+   dragging a white band across the photograph. */
+@property --bcard-trace {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
 }
-.bcard:hover::after { opacity: 1; }
+@keyframes bcardTrace { to { --bcard-trace: 360deg; } }
+
+@supports ((mask-composite: exclude) or (-webkit-mask-composite: xor)) {
+  .bcard::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+    border-radius: inherit;
+    padding: 1.6px;
+    background: conic-gradient(
+      from var(--bcard-trace),
+      transparent 0%,
+      transparent 58%,
+      rgba(156, 188, 227, 0.75) 72%,
+      var(--brand-deep) 83%,
+      rgba(156, 188, 227, 0.7) 90%,
+      transparent 100%
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.45s var(--ease);
+  }
+  .bcard:hover::after {
+    opacity: 1;
+    animation: bcardTrace 2.4s linear infinite;
+  }
+}
 .bcard:hover {
   transform: translateY(-8px);
   border-color: rgba(106, 151, 204, 0.6);
@@ -1778,7 +1804,7 @@ img { max-width: 100%; display: block; }
   background-repeat: no-repeat;
   background-position: 0 100%;
   background-size: 0% 2px;
-  transition: color 0.3s, background-size 0.55s var(--ease);
+  transition: color 0.3s, background-size 0.45s var(--ease);
 }
 .bcard:hover .bcard__title { color: var(--brand-deep); background-size: 100% 2px; }
 .bcard__excerpt {
@@ -1827,6 +1853,7 @@ img { max-width: 100%; display: block; }
   .bcard:hover { transform: none; }
   .bcard:hover .bcard__btn { transform: none; }
   .bcard:hover .bcard__title { background-size: 100% 2px; }
+  .bcard:hover::after { animation: none; }
 }
 
 /* ==========================================================================
@@ -2609,6 +2636,22 @@ img { max-width: 100%; display: block; }
 }
 .pc__status { left: 14px; background: #5f87b7; color: #fff; }
 .pc__type { right: 14px; text-transform: capitalize; background: rgba(14, 22, 32, 0.55); color: #fff; backdrop-filter: blur(8px); }
+/* how far along the build is: shown only when the stage is actually known */
+.pc__stage {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.93);
+  color: var(--brand-deep);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 18px -12px rgba(14, 22, 32, 0.75);
+}
 
 .pc__body { padding: 20px 14px 10px; display: flex; flex-direction: column; flex: 1; }
 .pc__dev { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-deep); }
