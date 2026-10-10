@@ -1218,6 +1218,25 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
 
     face.addEventListener('selx:close', close);
     face.addEventListener('click', () => (host.classList.contains('is-open') ? close() : show()));
+
+    /* The whole field box opens the menu — its caption, its padding, not just the
+       control. Only where the box belongs to this select alone: the CTA form has
+       no wrapper of its own, so there the host is the form and a click on the name
+       field or the submit button must not open anything. */
+    const ownsItsBox = host.tagName === 'LABEL' || !host.querySelector('input, textarea, button, a');
+    if (ownsItsBox) {
+      host.classList.add('selx--box');
+      host.addEventListener('click', (e) => {
+        // a <label> forwards a second, synthetic click to its control; without this the
+        // menu the face just opened would be toggled straight back shut
+        if (e.target === select) return;
+        if (e.target === face || face.contains(e.target)) { e.preventDefault(); return; }
+        if (e.target.closest && e.target.closest('.selx__panel')) return;
+        e.preventDefault(); // a <label> would otherwise hand focus to the hidden select
+        face.focus();
+        if (host.classList.contains('is-open')) close(); else show();
+      });
+    }
     face.addEventListener('keydown', (e) => {
       const isOpen = host.classList.contains('is-open');
       if (e.key === 'Escape') { close(); return; }

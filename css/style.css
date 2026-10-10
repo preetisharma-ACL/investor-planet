@@ -854,6 +854,8 @@ img { max-width: 100%; display: block; }
 /* The stand-in is a <div>, so it has to be told to centre its label vertically
    and to look clickable; a real select does both by itself. */
 .selx__face { display: flex; align-items: center; cursor: pointer; }
+/* the whole box is the hit area, so it should read as one */
+.selx--box { cursor: pointer; }
 /* the native control stays for forms and for scripts that read it, but is never shown */
 .selx > select { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 
