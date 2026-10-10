@@ -551,7 +551,7 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
     "Clear filters" button, which would otherwise widen the grid to every project.
   */
   const lockedType = form.dataset.lockedType || '';
-  const labels = { city: 'Location', status: 'Status', budget: 'Budget' };
+  const labels = { city: 'Location', ptype: 'Type', status: 'Status', budget: 'Budget' };
 
   // ----- state <-> URL -----
   const read = () => {
@@ -560,9 +560,9 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
       type: lockedType || u.get('type') || 'all',
       q: u.get('q') || '',
       city: u.get('city') || '',
+      ptype: u.get('ptype') || '',
       status: u.get('status') || '',
       budget: u.get('budget') || '',
-      sort: u.get('sort') || '',
       page: Math.max(1, Number(u.get('page')) || 1),
     };
   };
@@ -572,7 +572,7 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
     const u = new URLSearchParams();
     if (state.type !== 'all') u.set('type', state.type);
     if (lockedType) u.set('type', lockedType);
-    ['q', 'city', 'status', 'budget', 'sort'].forEach((k) => state[k] && u.set(k, state[k]));
+    ['q', 'city', 'ptype', 'status', 'budget'].forEach((k) => state[k] && u.set(k, state[k]));
     if (state.page > 1) u.set('page', String(state.page));
     const qs = u.toString();
     try { history.replaceState(null, '', qs ? `?${qs}` : location.pathname); } catch (err) {}
@@ -584,11 +584,11 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
       t.classList.toggle('is-active', on);
       t.setAttribute('aria-selected', String(on));
     });
-    ['q', 'city', 'status', 'budget', 'sort'].forEach((k) => {
+    ['q', 'city', 'ptype', 'status', 'budget'].forEach((k) => {
       const el = field(k);
       el.value = state[k];
       const wrap = el.closest('.fsel');
-      if (wrap) wrap.classList.toggle('is-set', !!state[k] && k !== 'sort');
+      if (wrap) wrap.classList.toggle('is-set', !!state[k]);
       el.dispatchEvent(new CustomEvent('ipr:sync'));
     });
   };
@@ -598,6 +598,7 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
     const price = Number(c.dataset.price);
     if (state.type !== 'all' && c.dataset.type !== state.type) return false;
     if (state.city && c.dataset.city !== state.city) return false;
+    if (state.ptype && c.dataset.ptype !== state.ptype) return false;
     if (state.status && c.dataset.status !== state.status) return false;
     if (state.budget) {
       const opt = field('budget').querySelector(`option[value="${state.budget}"]`);
@@ -610,19 +611,13 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
     return true;
   };
 
-  const sorted = (list) => {
-    const by = {
-      'price-asc': (a, b) => Number(a.dataset.price) - Number(b.dataset.price),
-      'price-desc': (a, b) => Number(b.dataset.price) - Number(a.dataset.price),
-      name: (a, b) => a.querySelector('.pc__name').textContent.localeCompare(b.querySelector('.pc__name').textContent),
-    }[state.sort] || ((a, b) => Number(a.dataset.index) - Number(b.dataset.index));
-    return [...list].sort(by);
-  };
+  // The grid keeps the order it was authored in; the sort control was removed.
+  const sorted = (list) => [...list].sort((a, b) => Number(a.dataset.index) - Number(b.dataset.index));
 
   // ----- rendering -----
   const renderChips = () => {
     chipsEl.innerHTML = '';
-    ['city', 'status', 'budget'].forEach((k) => {
+    ['city', 'ptype', 'status', 'budget'].forEach((k) => {
       if (!state[k]) return;
       const sel = field(k);
       const text = (sel.selectedOptions[0] && sel.selectedOptions[0].textContent) || state[k];
@@ -714,13 +709,13 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
 
   // ----- events -----
   tabs.forEach((t) => t.addEventListener('click', () => update({ type: t.dataset.type })));
-  ['city', 'status', 'budget', 'sort'].forEach((k) => field(k).addEventListener('change', (e) => update({ [k]: e.target.value })));
+  ['city', 'ptype', 'status', 'budget'].forEach((k) => field(k).addEventListener('change', (e) => update({ [k]: e.target.value })));
   let t;
   field('q').addEventListener('input', (e) => {
     window.clearTimeout(t);
     t = window.setTimeout(() => update({ q: e.target.value.trim() }), 250);
   });
-  const reset = () => update({ type: lockedType || 'all', q: '', city: '', status: '', budget: '', sort: '' });
+  const reset = () => update({ type: lockedType || 'all', q: '', city: '', ptype: '', status: '', budget: '' });
   document.getElementById('resetFilters').addEventListener('click', reset);
   document.querySelector('[data-reset]').addEventListener('click', reset);
 
