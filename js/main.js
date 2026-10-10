@@ -110,6 +110,14 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
       });
     });
 
+    // Same reveal, but the container's children come in one after another.
+    gsap.utils.toArray('[data-reveal-stagger]').forEach((el) => {
+      gsap.fromTo(el.children, { autoAlpha: 0, y: 46 }, {
+        autoAlpha: 1, y: 0, duration: 1.1, ease: 'expo.out', stagger: 0.12,
+        scrollTrigger: { trigger: el, start: 'top 86%', once: true },
+      });
+    });
+
     // Image parallax inside its frame.
     gsap.utils.toArray('[data-parallax]').forEach((img) => {
       gsap.fromTo(img, { yPercent: -8 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: img.parentElement, scrub: true } });
@@ -129,7 +137,7 @@ const lenis = new Lenis({ duration: 1.15, smoothWheel: !reduceMotion });
 
   function start() {
     if (reduceMotion) {
-      gsap.set('[data-reveal], [data-hero]', { autoAlpha: 1 });
+      gsap.set('[data-reveal], [data-hero], [data-reveal-stagger] > *', { autoAlpha: 1 });
       gsap.set('[data-hero-title] .line > span', { y: 0, yPercent: 0 });
       return;
     }

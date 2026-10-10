@@ -1710,21 +1710,20 @@ img { max-width: 100%; display: block; }
   pointer-events: none;
   background: radial-gradient(95% 62% at 4% -14%, rgba(255, 255, 255, 0.62), transparent 46%);
 }
-/* and a highlight that slides across on hover */
+/* In place of the usual diagonal shine: brand colour seeps up from the card's
+   base. It sits behind the text (which holds z-index 1) so nothing is washed out. */
 .bcard::after {
   content: '';
   position: absolute;
-  top: -10%;
-  bottom: -10%;
-  left: -65%;
-  width: 45%;
-  z-index: 3;
+  inset: auto 0 0 0;
+  height: 45%;
+  z-index: 0;
   pointer-events: none;
-  transform: skewX(-18deg);
-  background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.5), transparent);
-  transition: left 0.9s var(--ease);
+  background: linear-gradient(180deg, transparent, rgba(106, 151, 204, 0.18));
+  opacity: 0;
+  transition: opacity 0.5s var(--ease);
 }
-.bcard:hover::after { left: 125%; }
+.bcard:hover::after { opacity: 1; }
 .bcard:hover {
   transform: translateY(-8px);
   border-color: rgba(106, 151, 204, 0.6);
@@ -1768,8 +1767,20 @@ img { max-width: 100%; display: block; }
   text-transform: uppercase;
   color: var(--brand-deep);
 }
-.bcard__title { font-size: 20px; margin: 6px 0 6px; transition: color 0.3s; }
-.bcard:hover .bcard__title { color: var(--brand-deep); }
+/* the headline rule draws itself left to right, the way a printed deck underscores */
+.bcard__title {
+  font-size: 20px;
+  margin: 6px 0 6px;
+  /* hug the headline so the rule reads as deliberate, not as a divider */
+  width: fit-content;
+  max-width: 100%;
+  background-image: linear-gradient(var(--brand-deep), var(--brand-deep));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 2px;
+  transition: color 0.3s, background-size 0.55s var(--ease);
+}
+.bcard:hover .bcard__title { color: var(--brand-deep); background-size: 100% 2px; }
 .bcard__excerpt {
   font-size: 14px;
   line-height: 1.6;
@@ -1815,7 +1826,7 @@ img { max-width: 100%; display: block; }
   .bcard, .bcard__title, .bcard__btn, .bcard::after { transition: none; }
   .bcard:hover { transform: none; }
   .bcard:hover .bcard__btn { transform: none; }
-  .bcard:hover::after { left: -65%; }
+  .bcard:hover .bcard__title { background-size: 100% 2px; }
 }
 
 /* ==========================================================================
@@ -3665,126 +3676,75 @@ img { max-width: 100%; display: block; }
   margin: 0 auto;
   padding: 0;
   display: grid;
-  /* two wide cards read as a leadership line-up; a third or fourth wraps on its own */
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr));
-  gap: clamp(18px, 2vw, 26px);
-  max-width: 1040px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 228px), 1fr));
+  gap: clamp(22px, 2.6vw, 38px);
+  max-width: 1180px;
 }
 
 /*
-  Landscape cards. The portraits are only 173px square at source, so the frame is
-  held at a size that never upscales them; the card earns its presence from the
-  layout and the monogram instead of from a blown-up photograph.
+  Portrait-led: the photograph carries the card and the chrome is gone. One corner
+  of each frame opens into a wide arc, mirrored along the row so the line-up reads
+  as a set rather than four identical tiles.
 */
-.tmember {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  gap: clamp(16px, 1.8vw, 24px);
-  padding: clamp(18px, 2vw, 26px);
-  border-radius: 26px;
-  background: linear-gradient(135deg, #ffffff 0%, var(--ivory) 58%, #f1ebe1 100%);
-  border: 1px solid rgba(106, 151, 204, 0.22);
-  box-shadow: 0 1px 2px rgba(14, 22, 32, 0.04), 0 26px 54px -38px rgba(18, 49, 95, 0.55);
-  transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease), border-color 0.5s var(--ease);
-}
-/* a soft brand wash behind the portrait corner */
-.tmember::before {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  left: -70px;
-  top: -80px;
-  width: 240px;
-  height: 240px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(106, 151, 204, 0.3), transparent 70%);
-}
-/* initials set oversized and very faint, so the card has depth without clutter */
-.tmember::after {
-  content: attr(data-initials);
-  position: absolute;
-  z-index: -1;
-  right: 16px;
-  bottom: -26px;
-  font-family: var(--font-head);
-  font-size: 104px;
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: -0.045em;
-  color: rgba(31, 92, 158, 0.07);
-  transition: color 0.5s var(--ease), transform 0.6s var(--ease);
-}
-.tmember:hover {
-  transform: translateY(-6px);
-  border-color: rgba(106, 151, 204, 0.5);
-  box-shadow: 0 1px 2px rgba(14, 22, 32, 0.04), 0 34px 60px -32px rgba(18, 49, 95, 0.5);
-}
-.tmember:hover::after { color: rgba(31, 92, 158, 0.11); transform: translateY(-4px); }
+.tmember { position: relative; display: block; }
 
-/* the well: a white mount the portrait sits inside */
 .tmember__well {
-  flex: 0 0 auto;
-  padding: 7px;
-  border-radius: 22px;
-  background: #fff;
-  box-shadow: 0 14px 30px -20px rgba(18, 49, 95, 0.7), inset 0 0 0 1px rgba(14, 22, 32, 0.05);
-}
-.tmember__well img {
-  width: 148px;
-  height: 166px;
-  object-fit: cover;
-  object-position: center 22%;
   display: block;
-  border-radius: 16px;
-  transition: transform 0.6s var(--ease);
+  overflow: hidden;
+  aspect-ratio: 1 / 1.08;
+  background: var(--ivory);
+  border-radius: 14px 42% 14px 14px;
+  transition: border-radius 0.75s var(--ease), box-shadow 0.6s var(--ease);
 }
-.tmember:hover .tmember__well img { transform: scale(1.04); }
+/* the arc alternates sides down the row */
+.tmember:nth-child(even) .tmember__well { border-radius: 42% 14px 14px 14px; }
+/* and swings to the far corner on hover, which is where the motion comes from */
+.tmember:hover .tmember__well { border-radius: 14px 14px 42% 14px; box-shadow: 0 30px 56px -34px rgba(18, 49, 95, 0.55); }
+.tmember:nth-child(even):hover .tmember__well { border-radius: 14px 14px 14px 42%; }
 
-.tmember__body { display: grid; gap: 0; min-width: 0; }
-.tmember__name { margin: 7px 0 0; font-size: clamp(20px, 1.7vw, 23px); line-height: 1.25; color: var(--ink); }
-/* a short brand rule between the name and the action */
-.tmember__name::after {
-  content: '';
+.tmember__well img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 18%;
   display: block;
-  width: 34px;
-  height: 2px;
-  margin: 13px 0 0;
-  border-radius: 2px;
-  background: var(--brand);
-  transition: width 0.45s var(--ease), background 0.45s var(--ease);
+  /* monochrome at rest, colour as the viewer settles on a face */
+  filter: grayscale(1) contrast(1.04);
+  transition: filter 0.75s var(--ease), transform 0.9s var(--ease);
 }
-.tmember:hover .tmember__name::after { width: 58px; background: var(--brand-deep); }
+.tmember:hover .tmember__well img { filter: grayscale(0) contrast(1); transform: scale(1.045); }
+
+.tmember__body { display: block; padding: 18px 2px 0; }
+.tmember__name {
+  margin: 0;
+  font-size: clamp(19px, 1.5vw, 24px);
+  line-height: 1.2;
+  color: var(--ink);
+  transition: color 0.45s var(--ease);
+}
+.tmember:hover .tmember__name { color: var(--brand-deep); }
 .tmember__role {
   display: block;
-  font-size: 11.5px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--brand-deep);
+  margin-top: 7px;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1.45;
+  color: var(--muted);
 }
 
-@media (max-width: 1199.98px) {
-  .team__grid { max-width: 680px; }
+@media (max-width: 575.98px) {
+  .team__grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .tmember__name { font-size: 17px; }
+  .tmember__role { font-size: 12.5px; margin-top: 5px; }
+  .tmember__body { padding-top: 13px; }
 }
-@media (max-width: 767.98px) {
-  .tmember__well img { width: 132px; height: 150px; }
-  .tmember::after { font-size: 86px; }
-}
-@media (max-width: 479.98px) {
-  /* too narrow to sit side by side: stack and centre instead */
-  .tmember { flex-direction: column; text-align: center; gap: 16px; }
-  .tmember__body { justify-items: center; }
-  .tmember__name::after { margin-inline: auto; }
-  .tmember::after { right: 50%; transform: translateX(50%); bottom: -18px; }
-  .tmember:hover::after { transform: translateX(50%) translateY(-4px); }
-  .tmember__well img { width: 150px; height: 170px; }
-}
+
 @media (prefers-reduced-motion: reduce) {
-  .tmember, .tmember__well img, .tmember__body::before { transition: none; }
-  .tmember:hover { transform: none; }
+  .tmember__well, .tmember__well img, .tmember__name { transition: none; }
+  .tmember:hover .tmember__well { border-radius: 14px 42% 14px 14px; }
+  .tmember:nth-child(even):hover .tmember__well { border-radius: 42% 14px 14px 14px; }
   .tmember:hover .tmember__well img { transform: none; }
 }
 
